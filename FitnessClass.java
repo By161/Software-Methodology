@@ -34,7 +34,7 @@ public class FitnessClass {
     }
 
     /**
-     *
+     * Method that prints the list of students in inputted class
      * @param className
      */
     public String printStudentList(String className) {
