@@ -1,6 +1,6 @@
 /**
  *  FitnessClass class that keeps track of all the gym classes available for members to sign up for
- *  @author Brandon Yuen, Kathan Patelhan Patel
+ *  @author Brandon Yuen
  */
 
 public class FitnessClass {

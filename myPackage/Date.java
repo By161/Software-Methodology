@@ -4,7 +4,7 @@ import java.util.Calendar;
 /**
  * Date object class
  * This class creates an object for the dates to keep track of each member's memberships and dates of birth.
- * @author Brandon Yuen, Kathan Patelhan Patel
+ * @author Brandon Yuen
  */
 public class Date implements Comparable<Date> {
     private int year;

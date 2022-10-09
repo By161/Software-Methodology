@@ -2,7 +2,7 @@ import myPackage.Date;
 /**
  * MemberDatabase class
  * creates a list of all the members of the gym
- * @author Brandon Yuen, Kathan Patelhan Patel
+ * @author Brandon Yuen
  */
 public class MemberDatabase {
     /** An array of member type to store member details.*/

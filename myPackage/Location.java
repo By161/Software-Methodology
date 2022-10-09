@@ -2,7 +2,7 @@ package myPackage;
 /**
  *  The required enum class for location
  *  This class shows all the locations and their constants that identify them.
- *  @author Brandon Yuen, Kathan Patelhan Patel
+ *  @author Brandon Yuen
  */
 public enum Location {
     BRIDGEWATER ("08807", "SOMERSET"),

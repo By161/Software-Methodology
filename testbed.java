@@ -4,7 +4,7 @@ import myPackage.Date;
 import myPackage.Location;
 /**
  * Testbed class, shows test cases to test the requested methods to be tested.
- * @author Brandon Yuen, Kathan Patelhan Patel
+ * @author Brandon Yuen
  */
 public class testbed {
     public static void main (String[] args){

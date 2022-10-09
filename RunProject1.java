@@ -1,7 +1,7 @@
 /**
  * Class that runs project 1
  * Calls the gym manager class and run method inside that class
- * @author Brandon Yuen, Kathan Patelhan Patel
+ * @author Brandon Yuen
  */
 public class RunProject1 {
     /**

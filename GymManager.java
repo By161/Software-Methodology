@@ -5,7 +5,7 @@ import myPackage.Location;
 /**
  * GymManager class that handles all the functions that maintain the gym
  * Main class that is called to run the software
- * @author Brandon Yuen, Kathan Patelhan Patel
+ * @author Brandon Yuen
  */
 public class GymManager {
     private boolean running = true;

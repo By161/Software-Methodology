@@ -4,7 +4,7 @@ import myPackage.Location;
 /**
  *  Member class
  *  creates an object for the gym members to hold all their relevant information
- *  @author @author Brandon Yuen, Kathan Patelhan Patel
+ *  @author @author Brandon Yuen
  */
 public class Member implements Comparable<Member> {
     private String fname;
