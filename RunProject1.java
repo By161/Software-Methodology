@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 /**
  * Class that runs project 1
  * Calls the gym manager class and run method inside that class
@@ -9,7 +11,7 @@ public class RunProject1 {
      * Runs all of project 1
      * @param args
      */
-    public static void main (String[] args){
+    public static void main (String[] args) throws FileNotFoundException {
         new GymManager().run();
     }
 }
