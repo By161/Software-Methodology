@@ -185,7 +185,7 @@ public class GymManager {
     }
 
     private void commandLS() throws FileNotFoundException {
-        File file = new File("C:\\Users\\SPCHB\\Downloads\\classSchedule.txt");
+        File file = new File("C:\\Users\\SPCHB\\Downloads\\classSchedule.txt"); //file path
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()){                                       //reads all lines as long as there is another line after it
             String[] processedInput =  processLine(sc.nextLine());      //seperates the line into an array for easier access to the information
@@ -194,7 +194,7 @@ public class GymManager {
         }
     }
     private void commandLM() throws FileNotFoundException {
-        File file = new File("C:\\Users\\SPCHB\\Downloads\\memberList.txt");
+        File file = new File("C:\\Users\\SPCHB\\Downloads\\memberList.txt"); //file path
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()){                                       //reads all lines as long as there is another line after it
             String[] processedInput =  processLine(sc.nextLine());
