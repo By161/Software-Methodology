@@ -1,5 +1,7 @@
+import java.io.FileNotFoundException;
 import java.util.Calendar;
 import java.util.Scanner;
+import java.io.File;
 import myPackage.Date;
 import myPackage.Location;
 /**
@@ -13,6 +15,7 @@ public class GymManager {
     FitnessClass fitClassPilates = new FitnessClass("Pilates","JENNIFER", Time.MORNING);
     FitnessClass fitClassSpin = new FitnessClass("Spinning","DENISE", Time.AFTERNOON);
     FitnessClass fitClassCardio = new FitnessClass("Cardio","KIM", Time.AFTERNOON);
+    String inputLine;
     /**
      * Creates an array to split up the information in the input line
      * @param line
@@ -98,8 +101,8 @@ public class GymManager {
         String[] processedInput = processLine(input);
         Member tempMember = new Member (processedInput[1], processedInput[2], new Date(processedInput[3]), null, null);
         if (processedInput.length == 4) {
-           database.remove(tempMember);
-           System.out.println(processedInput[1] + " " + processedInput[2] + " removed");
+            database.remove(tempMember);
+            System.out.println(processedInput[1] + " " + processedInput[2] + " removed");
         }
         else{
             System.out.println("Error");
@@ -181,14 +184,30 @@ public class GymManager {
         Member tempMember = new Member (processedInput[2], processedInput[3], new Date(processedInput[4]), null, null);
     }
 
+    private void commandLS() throws FileNotFoundException {
+        File file = new File("C:\\Users\\SPCHB\\Downloads\\classSchedule.txt");
+        Scanner sc = new Scanner(file);
+        while (sc.hasNextLine()){                                       //reads all lines as long as there is another line after it
+            String[] processedInput =  processLine(sc.nextLine());      //seperates the line into an array for easier access to the information
+            Member tempMember = new Member (processedInput[1], processedInput[2], new Date(processedInput[3]), new Date(processedInput[4]), Location.valueOf(processedInput[5].toUpperCase())); //should not be a member this is based off what the fitness class is so finish this later
+            addNewMember(tempMember);
+        }
+    }
+    private void commandLM() throws FileNotFoundException {
+        File file = new File("C:\\Users\\SPCHB\\Downloads\\memberList.txt");
+        Scanner sc = new Scanner(file);
+        while (sc.hasNextLine()){                                       //reads all lines as long as there is another line after it
+            String[] processedInput =  processLine(sc.nextLine());
+            Member tempMember = new Member (processedInput[1], processedInput[2], new Date(processedInput[3]), new Date(processedInput[4]), Location.valueOf(processedInput[5].toUpperCase()));
+            addNewMember(tempMember);
+        }
+    }
     /**
      * Method that runs the program based off the inputted command
      */
     public void run() {
         System.out.print("Gym Manager Running...");
-        Scanner sc = new Scanner(System.in);
         while(running){
-            String inputLine = sc.nextLine();
             String[] inputArray= processLine(inputLine);
             if (inputLine.length() < 1){
                 continue;
@@ -204,6 +223,8 @@ public class GymManager {
                 case "S" -> commandS();
 //                case "C" -> commandC(inputLine);                          // not enough time (solo'd this project I emailed the professor)
 //                case "D" -> commandD(inputLine);                          // not enough time (solo'd this project I emailed the professor)
+                case "LS" -> commandLS();
+                case "LM" -> commandLM();
                 case "Q" -> {
                     System.out.println("Gym Manager terminated.");
                     running = false;
