@@ -205,7 +205,7 @@ public class GymManager {
     /**
      * Method that runs the program based off the inputted command
      */
-    public void run() {
+    public void run() throws FileNotFoundException {
         System.out.print("Gym Manager Running...");
         while(running){
             String[] inputArray= processLine(inputLine);
