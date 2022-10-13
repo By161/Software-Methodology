@@ -12,9 +12,6 @@ import myPackage.Location;
 public class GymManager {
     private boolean running = true;
     MemberDatabase database = new MemberDatabase();
-    FitnessClass fitClassPilates = new FitnessClass("Pilates","JENNIFER", Time.MORNING);
-    FitnessClass fitClassSpin = new FitnessClass("Spinning","DENISE", Time.AFTERNOON);
-    FitnessClass fitClassCardio = new FitnessClass("Cardio","KIM", Time.AFTERNOON);
     String inputLine;
     /**
      * Creates an array to split up the information in the input line
@@ -51,46 +48,7 @@ public class GymManager {
      * @param input
      */
     private void commandA(String input){
-        Calendar calendar = Calendar.getInstance();
-        String[] processedInput = processLine(input);
-        Member tempMember = null;
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DATE);
-        int year = calendar.get(Calendar.YEAR);
-        Date today = new Date();
-        if (processedInput.length == 6) {
-            try {
-                tempMember = new Member(processedInput[1], processedInput[2], new Date(processedInput[3]), new Date(processedInput[4]), Location.valueOf(processedInput[5].toUpperCase()));
-            } catch (Exception e) {
-                System.out.println(processedInput[5] + ": invalid location!");
-                return;
-            }
-            if (!tempMember.getdob().isValid()){
-                System.out.println("DOB " + tempMember.getdob().toString() + ": invalid calendar date!");
-                return;
-            }
-            if (!tempMember.getexpire().isValid()){
-                System.out.println("Expiration date " + tempMember.getexpire().toString() + ": invalid calendar date!");
-                return;
-            }
-            if (tempMember.getdob().compareTo(today) <= 0){
-                System.out.println(tempMember.getdob().toString() + ": cannot be today or a future date!");
-                return;
-            }
-            if (!is18(tempMember)){
-                System.out.println(tempMember.getdob().toString() + ": must be 18 or older to join!");
-                return;
-            }
-            if(!database.add(tempMember)){
-                System.out.println(tempMember.getfname() + " " + tempMember.getlname() + " is already in the database.");
-            }
-            else{
-                System.out.println(tempMember.getfname() + " " + tempMember.getlname() + " added.");
-            }
-        }
-        else{
-            System.out.println("Error");
-        }
+
     }
 
     /**
@@ -99,7 +57,7 @@ public class GymManager {
      */
     private void commandR(String input){
         String[] processedInput = processLine(input);
-        Member tempMember = new Member (processedInput[1], processedInput[2], new Date(processedInput[3]), null, null);
+        Member tempMember = new Member (processedInput[1], processedInput[2], null, null);
         if (processedInput.length == 4) {
             database.remove(tempMember);
             System.out.println(processedInput[1] + " " + processedInput[2] + " removed");
@@ -144,61 +102,40 @@ public class GymManager {
     /**
      * helper method that performs the actions that the input S is intended to do
      */
-    private void commandS (){
-        System.out.println("-Fitness classes-\n");
-        fitClassPilates.setClassTime(Time.MORNING);
-        System.out.println(fitClassPilates.toString());
-        fitClassSpin.setClassTime(Time.AFTERNOON);
-        System.out.println(fitClassSpin.toString());
-        fitClassCardio.setClassTime(Time.AFTERNOON);
-        System.out.println(fitClassCardio.toString());
-    }
+//    private void commandS (){
+//        System.out.println("-Fitness classes-\n");
+//        fitClassPilates.setClassTime(Time.MORNING);
+//        System.out.println(fitClassPilates.toString());
+//        fitClassSpin.setClassTime(Time.AFTERNOON);
+//        System.out.println(fitClassSpin.toString());
+//        fitClassCardio.setClassTime(Time.AFTERNOON);
+//        System.out.println(fitClassCardio.toString());
+//    }
 
     /**
      * helper method that performs the actions that the input C is intended to do
      * @param input
      */
     private void commandC (String input){
-        String[] processedInput = processLine(input);
-        String classType = processedInput[1];
-        String fname = processedInput[2];
-        String lname = processedInput[3];
-        Date dob = new Date(processedInput[4]);
-        Member tempMember = new Member (fname, lname, dob, null, null);
-        if(dob.isValid()){
-            switch(classType){
-                case "Pilates" -> fitClassPilates.removeStudent("Pilates", tempMember);
-                case "Spinning" -> fitClassSpin.removeStudent("Spinning", tempMember);
-                case "Cardio" -> fitClassCardio.removeStudent("Cardio", tempMember);
-                default -> System.out.println(classType + " class does not exist");
-            }
-        }
-    }
 
-    /**
-     * helper method that performs the actions that the input D is intended to do
-     * @param input
-     */
-    private void commandD(String input){
-        String[] processedInput = processLine(input);
-        Member tempMember = new Member (processedInput[2], processedInput[3], new Date(processedInput[4]), null, null);
     }
-
     private void commandLS() throws FileNotFoundException {
         File file = new File("C:\\Users\\SPCHB\\Downloads\\classSchedule.txt"); //file path
         Scanner sc = new Scanner(file);
+        System.out.println("-Fitness classes loaded-");
         while (sc.hasNextLine()){                                       //reads all lines as long as there is another line after it
             String[] processedInput =  processLine(sc.nextLine());      //seperates the line into an array for easier access to the information
-            Member tempMember = new Member (processedInput[1], processedInput[2], new Date(processedInput[3]), new Date(processedInput[4]), Location.valueOf(processedInput[5].toUpperCase())); //should not be a member this is based off what the fitness class is so finish this later
+            Member tempMember = new Member (processedInput[1], processedInput[2], new Date(processedInput[3]), Location.valueOf(processedInput[5].toUpperCase())); //should not be a member this is based off what the fitness class is so finish this later
             addNewMember(tempMember);
         }
     }
     private void commandLM() throws FileNotFoundException {
         File file = new File("C:\\Users\\SPCHB\\Downloads\\memberList.txt"); //file path
         Scanner sc = new Scanner(file);
+        System.out.println("-list of members loaded-");
         while (sc.hasNextLine()){                                       //reads all lines as long as there is another line after it
             String[] processedInput =  processLine(sc.nextLine());
-            Member tempMember = new Member (processedInput[1], processedInput[2], new Date(processedInput[3]), new Date(processedInput[4]), Location.valueOf(processedInput[5].toUpperCase()));
+            Member tempMember = new Member (processedInput[1], processedInput[2], new Date(processedInput[3]), Location.valueOf(processedInput[5].toUpperCase()));
             addNewMember(tempMember);
         }
     }
@@ -220,9 +157,8 @@ public class GymManager {
                 case "PD" -> commandPD();
                 case "PN" -> commandPN();
                 case "PC" -> commandPC();
-                case "S" -> commandS();
-//                case "C" -> commandC(inputLine);                          // not enough time (solo'd this project I emailed the professor)
-//                case "D" -> commandD(inputLine);                          // not enough time (solo'd this project I emailed the professor)
+//                case "S" -> commandS();
+//                case "C" -> commandC(inputLine);
                 case "LS" -> commandLS();
                 case "LM" -> commandLM();
                 case "Q" -> {

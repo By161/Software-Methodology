@@ -10,7 +10,6 @@ public class Member implements Comparable<Member> {
     private String fname;
     private String lname;
     private Date dob;
-    private Date expire;
     private Location location;
 
     /**
@@ -19,14 +18,12 @@ public class Member implements Comparable<Member> {
      * @param fname
      * @param lname
      * @param dob
-     * @param expire
      * @param location
      */
-    public Member(String fname, String lname, Date dob, Date expire, Location location) {
+    public Member(String fname, String lname, Date dob, Location location) {
         this.fname = fname;
         this.lname = lname;
         this.dob = dob;
-        this.expire = expire;
         this.location = location;
     }
 
@@ -55,14 +52,6 @@ public class Member implements Comparable<Member> {
     }
 
     /**
-     * Getter method for date of when the membership expiration date
-     * @return String of the date of when the membership expires
-     */
-    public Date getexpire() {
-        return this.expire;
-    }
-
-    /**
      * Getter method for the location of the gym the member is at
      * @return location of the gym the member goes to
      */
@@ -78,7 +67,7 @@ public class Member implements Comparable<Member> {
 
     @Override
     public String toString() {
-        return this.fname + " " + this.lname + ", DOB:" + this.dob.toString() + ", Membership expires " + this.expire.toString() + ", Location: " + location.toString();
+        return this.fname + " " + this.lname + ", DOB:" + this.dob.toString() + ", Membership expires " + ", Location: " + location.toString();
     }
 
     @Override
@@ -119,6 +108,9 @@ public class Member implements Comparable<Member> {
             return 1;
         }
         return -1;
+    }
+    public double membershipFee(){
+        return 29.99;
     }
 }
 

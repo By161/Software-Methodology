@@ -1,317 +1,243 @@
-import myPackage.Date;
-/**
- * MemberDatabase class
- * creates a list of all the members of the gym
- * @author Brandon Yuen
+package Project2Folder;
+
+import java.lang.reflect.Member;
+
+/** This class implements methods that handle the member database for the gym.
+ * @author Anna Kryzanekas
  */
 public class MemberDatabase {
-    /** An array of member type to store member details.*/
-     private Member [] mlist;
-     private int size;
-    private int array_size;
+    private Member[] mlist;
+    private int size = 4;
+    //added variables
+    public static final int NOT_FOUND = -1;
 
     /**
-     * MemberDatabase constructor
+     * This constructor defines mlist where members will be stored and the size of mlist.
      */
-    public MemberDatabase()
-     {
-         this.mlist = new Member[4];
-         this.size = 0;
-     }
+    public MemberDatabase() {
+        this.mlist = new Member[size];
+    }
 
     /**
-     * Getter method for the database array size
-     * @return the int size of the database array
+     * Searches for a member in the database.
+     * @param member inputted gym member.
+     * @return the index of the member if found and NOT_FOUND if the member is not in the list.
      */
-     public int getSize(){
-        return this.size;
-     }
-
-    /**
-     * Getter method for the whole database array
-     * @return the array of all the members at the gyms
-     */
-     public Member[] getMemberArray()
-     {
-         return mlist;
-     }
-
-    /**
-     * Helper method that finds the input member inside the current member database
-     * @param member
-     * @return the index of the inputted member inside the array
-     */
-     private int find(Member member)
-     {
-         String fname = member.getfname().toLowerCase();
-         String lname = member.getlname().toLowerCase();
-         Date dob = member.getdob();
-         for(int i = 0; i < mlist.length; i++)
-         {
-             if (mlist[i] == null){
-                 continue;
-             }
-
-             if(mlist[i].getfname().toLowerCase().equals(fname) && mlist[i].getlname().toLowerCase().equals(lname) && mlist[i].getdob().compareTo(dob) == 0)
-             {
-                 return i;
-             }
-         }
-         return -1;
-     }
-
-    /**
-     * helper method that increases the size of the member database array when needed
-     */
-    private void grow()
-     {
-         Member[] newmlist = new Member[mlist.length + 4];
-
-         for (int i = 0 ; i < mlist.length ; i++)
-         {
-             newmlist[i] = mlist[i];
-         }
-
-         mlist = newmlist;
-     }
-
-    /**
-     * Helper method that adds the inputted member into the database array
-     * @param member
-     * @return boolean value if the inputted member has successfully been added to the list
-     */
-     public boolean add(Member member)
-     {
-        if (find(member) >= 0){
-            return false;
+    private int find(Member member) {
+        for (int i = 0; i < size; i++) {
+            if (mlist[i] != null && mlist[i].equals(member)) {
+                return i;
+            }
         }
-        if (size == mlist.length)
-        {
-            grow();
-        }
-
-        if(member.equals(null))
-            return false;
-
-        mlist[size] = member;
-        size++;
-
-        return true;
-     }
+        return NOT_FOUND;
+    }
 
     /**
-     * Helper method that removes the inputted member from the member database array
-     * @param member
-     * @return boolean value that shows if the inputted member has been successfully removed from the list
+     * Increases the capacity of the list, or database, by 4. The capacity never decreases.
      */
-     public boolean remove(Member member)
-     {
-         int index = find(member);
-         if (index == -1)
-         {
-             return false;
-         }
-
-         Member[] temp_member_array = new Member[mlist.length];
-
-         for(int i=0, j=0; i < mlist.length; i++)
-         {
-             if(i!= index){
-                 temp_member_array[j++] = mlist[i];
-             }
-         }
-
-         size--;
-         mlist = temp_member_array;
-         shiftDelete();
-         return true;
-
-     }
-
-    /**
-     * Helper method that prints the whole database in no specific order
-     */
-    public void print ()
-     {
-         if (size  == 0) {
-             System.out.println("Member database is empty!");
-             return;
-         }
-         System.out.println("\n\n-list of members-");
-
-         print_array(mlist);
-
-         System.out.println("-end of list-\n\n");
-     } //print the array contents as is
-
-    /**
-     * Helper method that prints the inputted helper array
-     * @param arr
-     */
-    private void print_array(Member[] arr)
-    {
-        for(int i = 0; i < arr.length && arr[i] != null; i++)
-        {
-            System.out.println(arr[i].toString());
+    private void grow() {
+        int newListLength = size + 4;
+        Member[] tempList = new Member[newListLength];
+        if (mlist[size - 1] != null) {
+            for (int i = 0; i < size; i++) {
+                tempList[i] = mlist[i];
+            }
+            mlist = tempList;
+            size += 4;
         }
     }
 
     /**
-     * Selection sort helper method that is called to sort an inputted array
-     * @param temp_array1
+     * Adds a member to the database if they are not already in the list.
+     * @param member current member being added to the database.
+     * @return true once the member is successfully added and false if not.
      */
-    private void selection_sort_for_ByExpirationDate(Member[] temp_array1)
-    {
-        int array_size = temp_array1.length;
-
-        for (int i = 0; i < array_size - 1; i++)
-        {
-            int min_index = i;
-
-            for (int j = i + 1; j < array_size; j++)
-            {
-                if (temp_array1[j] != null && temp_array1[min_index] != null)
-                {
-                    Date dateone = temp_array1[j].getexpire();
-                    Date datetwo = temp_array1[min_index].getexpire();
-
-                    if ((dateone).compareTo(datetwo) == -1)
-                    {
-                        min_index = j;
-                    }
+    public boolean add(Member member) {
+        grow();
+        if (find(member) != NOT_FOUND) {
+            System.out.println(member.getFirstName() + " " + member.getLastName() +
+                    " is already in the database.");
+            return false;
+        }
+        else {
+            for (int i = 0; i < size; i++) {
+                if (mlist[i] == null) {
+                    mlist[i] = member;
+                    System.out.println(member.getFirstName() + " " + member.getLastName() + " added.");
+                    return true;
                 }
             }
-
-            Member temp = temp_array1[min_index];
-            temp_array1[min_index] = temp_array1[i];
-            temp_array1[i] = temp;
         }
-
-        print_array(temp_array1);
+        return false;
     }
 
     /**
-     * Helper method that sorts and prints the database based on the members expiration dates
+     * Removes a member from the database if they are in the list.
+     * @param member current member that wants to be removed from the database.
+     * @return true if the member is successfully removed from the database and false if the member
+     * is not in the database to begin with.
      */
-    public void printByExpirationDate()
-    {
-        if (size == 0) {
+    public boolean remove(Member member) {
+        int memberToRemove = find(member);
+        if (memberToRemove != NOT_FOUND) {
+            mlist[memberToRemove] = null;
+            for (int i = memberToRemove; i < size - 1; i++) {
+                mlist[i] = mlist[i + 1];
+                mlist[i + 1] = null;
+            }
+            System.out.println(member.getFirstName() + " " + member.getLastName() + " removed.");
+            return true;
+        } else {
+            System.out.println(member.getFirstName() + " " + member.getLastName() + " is not in the database.");
+            return false;
+        }
+    }
+
+    /**
+     * Prints the array contents as is.
+     */
+    public void print () {
+        if (mlist[0] == null) {
             System.out.println("Member database is empty!");
-            return;
         }
-        System.out.println("-list of members sorted by membership expiration date-");
-
-        Member[] temp_array1 = new Member[mlist.length];
-
-        for (int i = 0 ; i < mlist.length ; i++)
-        {
-            temp_array1[i] = mlist[i];
-        }
-
-        selection_sort_for_ByExpirationDate(temp_array1);
-
-        System.out.println("-end of list-\n\n");
-    } //sort by county and then zipcode
-
-    /**
-     * Helper method that sorts and prints the database based on the members counties
-     */
-    public void printByCounty()
-    {
-      if(size==0)
-      {
-          System.out.println("Member database is empty!");
-          return;
-      }
-      System.out.println("-list of members sorted by county and zipcode-");
-      Member[] temp_array2 = new Member[mlist.length];
-        for (int i = 0 ; i < mlist.length ; i++)
-        {
-            temp_array2[i] = mlist[i];
-        }
-        for(int i = 0; i < array_size - 1; i++)
-        {
-            for (int j = i + 1; j < array_size; j++)
-            {
-                if (temp_array2[i] != null && temp_array2[j] != null)
-                {
-                    String county1 = temp_array2[i].getLocation().getCounty();
-                    String county2 = temp_array2[j].getLocation().getCounty();
-
-                    if(county1.compareTo(county2) > 0)
-                    {
-                        Member temp = temp_array2[i];
-                        temp_array2[i] = temp_array2[j];
-                        temp_array2[j] = temp;
-                    }
+        else {
+            System.out.println();
+            System.out.println("-list of members-");
+            for (int i = 0; i < size; i++) {
+                if (mlist[i] != null) {
+                    System.out.println(mlist[i]);
                 }
             }
+            System.out.println("-end of list-");
+            System.out.println();
         }
-
-        print_array(temp_array2);
-
-        System.out.println("-end of list-\n\n");
     }
 
     /**
-     * Helper method that sorts and prints the database based on the members last name and first nane's
+     * Prints the array contents for the sorting methods.
      */
-     public void printByName()
-     {
-         if(size==0)
-         {
-             System.out.println("Member database is empty!");
-             return;
-         }
-         System.out.println("-list of members sorted by last name and first name-");
-         Member[] temp_array2 = new Member[mlist.length];
-         for (int i = 0 ; i < mlist.length ; i++)
-         {
-             temp_array2[i] = mlist[i];
-         }
-         for (int i = 0; i < array_size - 1; i++)
-         {
-             for (int j = i + 1; j < array_size; j++)
-             {
-                 if (temp_array2[i] != null && temp_array2[j] != null)
-                 {
-                     String lname1 = temp_array2[i].getlname();
-                     String lname2 = temp_array2[j].getlname();
-
-                     if (lname1.compareTo(lname2) == 1){
-                         Member temp = temp_array2[i];
-                         temp_array2[i] = temp_array2[j];
-                         temp_array2[j] = temp;
-                     }
-                     else if(lname1.compareTo(lname2) == -1){
-                         Member temp = temp_array2[j];
-                         temp_array2[i] = temp_array2[i];
-                         temp_array2[j] = temp;
-                     }
-                 }
-             }
-         }
-
-         print_array(temp_array2);
-
-         System.out.println("-end of list-\n\n");
-     }
+    public void printForSort () {
+        if (mlist[1] == null) {
+            System.out.println("Member database is empty!");
+        }
+        else {
+            for (int i = 0; i < size; i++) {
+                if (mlist[i] != null) {
+                    System.out.println(mlist[i]);
+                }
+            }
+            System.out.println("-end of list-");
+            System.out.println();
+        }
+    }
 
     /**
-     * Helper method that moves all the members up one index when a member is removed from the database.
+     * Sorts the database by county and then zipcode of members. This method uses insertion sort.
      */
-    private void shiftDelete (){
-        Member[] newList = new Member[size];
-        int pointer = 0;
-        for (int i = 0; i < mlist.length; i++){
-            if (!(mlist[i] == null)){
-                newList[pointer] = mlist[i];
-                pointer++;
+    public void printByCounty() {
+        if (mlist[0] == null) {
+            System.out.println("Member database is empty!");
+        }
+        else {
+            System.out.println();
+            System.out.println("-list of members sorted by county and zipcode-");
+            for (int i = 0; i < size; i++) {
+                Member key = mlist[i];
+                if (key == null) {
+                    continue;
+                }
+                int j = i - 1;
+
+                while (j >= 0 && (key.getLocation().getCounty().compareTo((mlist[j].getLocation().getCounty())) < 0
+                        || (key.getLocation().getCounty().compareTo(mlist[j].getLocation().getCounty()) == 0
+                        && key.getLocation().getZipcode().compareTo(mlist[j].getLocation().getZipcode()) < 0))) {
+                    mlist[j + 1] = mlist[j];
+                    j--;
+                }
+                mlist[j + 1] = key;
             }
         }
-        for(int a = 0; a < newList.length; a++){
-            System.out.println(newList[a]);
+        printForSort();
+    }
+
+    /**
+     * Sorts the database by the expiration dates of members. This method uses insertion sort.
+     */
+    public void printByExpirationDate() {
+        if (mlist[1] == null) {
+            System.out.println("Member database is empty!");
         }
-        mlist = newList;
-     }
+        else {
+            System.out.println();
+            System.out.println("-list of members sorted by membership expiration date-");
+            for (int i = 0; i < size; i++) {
+                Member key = mlist[i];
+                if (key == null) {
+                    continue;
+                }
+                int j = i - 1;
+
+                while (j >= 0 && key.getExpire().compareTo(mlist[j].getExpire()) < 0) {
+                    mlist[j + 1] = mlist[j];
+                    j--;
+                }
+                mlist[j + 1] = key;
+            }
+        }
+        printForSort();
+    }
+
+    /**
+     * Sorts the database by last name and then first name of members. This method uses insertion sort.
+     */
+    public void printByName () {
+        if (mlist[1] == null) {
+            System.out.println("Member database is empty!");
+        }
+        else {
+            System.out.println();
+            System.out.println("-list of members sorted by last name, and first name-");
+            for (int i = 0; i < size; i++) {
+                Member key = mlist[i];
+                if (key == null) {
+                    continue;
+                }
+                int j = i - 1;
+
+                while (j >= 0 && key.compareTo(mlist[j]) < 0) {
+                    mlist[j + 1] = mlist[j];
+                    j--;
+                }
+                mlist[j + 1] = key;
+            }
+        }
+        printForSort();
+    }
+
+    /**
+     * Added public method searches for a member in the database so that we can later refer to
+     * this in the FitnessClass.
+     * @param member inputted gym member.
+     * @return the index of the member if found and NOT_FOUND if the member is not in the list.
+     */
+    public int findForClass(Member member) {
+        return find(member);
+    }
+
+    /**
+     * Checks if the membership has expired.
+     * @param member inputted gym member.
+     * @return true if membership has expired and false if it has not.
+     */
+    public boolean isExpired(Member member) {
+        Member key = mlist[find(member)];
+        Date today = new Date();
+        if (key.getExpire().compareTo(today) < 0) {
+            return false;
+        }
+        else {
+            System.out.println(member + key.getExpire().toString() + " membership expired.");
+            return true;
+        }
+    }
 }
