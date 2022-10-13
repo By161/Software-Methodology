@@ -13,12 +13,13 @@ public class GymManager {
     private boolean running = true;
     MemberDatabase database = new MemberDatabase();
     String inputLine;
+    ClassSchedule schedule = new ClassSchedule();
     /**
      * Creates an array to split up the information in the input line
      * @param line
      * @return an array that holds all the information inputted
      */
-    private String[] processLine(String line){
+    public String[] processLine(String line){
         String[] commandLine = line.split(" ");
         return commandLine;
     }
@@ -117,16 +118,29 @@ public class GymManager {
      * @param input
      */
     private void commandC (String input){
+        String[] processedInput = processLine(input);
+        String classType = processedInput[1];
+        String fitnessInstructor = processedInput[2];
+        String location = processedInput[3];
+        String fname = processedInput[4];
+        String lname = processedInput[5];
+        String dateOfBirth = processedInput[6];
+        Date dob = new Date(dateOfBirth);
+        Member tempMember=  new Member (fname, lname, dob, Location.valueOf(location.toUpperCase()));
 
     }
-    private void commandLS() throws FileNotFoundException {
+    public void commandLS() throws FileNotFoundException {
         File file = new File("C:\\Users\\SPCHB\\Downloads\\classSchedule.txt"); //file path
         Scanner sc = new Scanner(file);
         System.out.println("-Fitness classes loaded-");
-        while (sc.hasNextLine()){                                       //reads all lines as long as there is another line after it
-            String[] processedInput =  processLine(sc.nextLine());      //seperates the line into an array for easier access to the information
-            Member tempMember = new Member (processedInput[1], processedInput[2], new Date(processedInput[3]), Location.valueOf(processedInput[5].toUpperCase())); //should not be a member this is based off what the fitness class is so finish this later
-            addNewMember(tempMember);
+        while (sc.hasNextLine()) {
+            String[] processedInput = processLine(sc.nextLine());
+            String classType = processedInput[0];
+            String instructor = processedInput[1];
+            Time classTime = Time.valueOf(processedInput[3].toUpperCase());
+            Location location = Location.valueOf(processedInput[4].toUpperCase());
+            FitnessClass newClass = new FitnessClass(classType, instructor, classTime, location);
+            schedule.addClass(newClass);
         }
     }
     private void commandLM() throws FileNotFoundException {

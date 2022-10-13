@@ -28,6 +28,10 @@ public enum Location {
         return this.county;
     }
 
+    public String getZipcode() {
+        return zipcode;
+    }
+
     /**
      * toString method for location
      * helps to print out information for the corresponding location.

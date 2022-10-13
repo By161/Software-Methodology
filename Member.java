@@ -1,5 +1,6 @@
 import myPackage.Date;
 import myPackage.Location;
+import java.util.Calendar;
 
 /**
  *  Member class
@@ -111,6 +112,13 @@ public class Member implements Comparable<Member> {
     }
     public double membershipFee(){
         return 29.99;
+    }
+    public Date getExpire() {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, 3);
+        Date todayDate = new Date();
+        Date expire = todayDate.addThreeMonths();
+        return expire;
     }
 }
 

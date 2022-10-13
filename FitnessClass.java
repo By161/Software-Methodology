@@ -1,23 +1,34 @@
 import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.util.Calendar;
+import java.util.Scanner;
+import java.io.File;
+
+import com.sun.jdi.ClassType;
+import myPackage.Date;
+import myPackage.Location;
 /**
  *  FitnessClass class that keeps track of all the gym classes available for members to sign up for
  *  @author Brandon Yuen
  */
 public class FitnessClass {
     private String classType;
-    private Member fitnessInstructor;
+    private String fitnessInstructor;
     private Time classTime;
-    private MemberDatabase classList;
+    private ArrayList<Member> classList;
+    private ArrayList<Member> studentList;
+    private Location location;
     /**
      * Constructor for the FitnessClass object
      * @param classType
      * @param instructorName
      * @param classStartingTime
      */
-    public FitnessClass(String classType, Member instructorName, Time classStartingTime) {
+    public FitnessClass(String classType, String instructorName, Time classStartingTime, Location location) {
         this.classType = classType;
         this.fitnessInstructor = instructorName;
         this.classTime = classStartingTime;
+        this.location = location;
     }
     /**
      * Getter method for the classType
@@ -31,20 +42,25 @@ public class FitnessClass {
      * @param member
      */
     public void addStudent(Member member){
-        classList.add(member);
+        studentList.add(member);
     }
     public int findStudent(Member member){
-        return this.classList.find(member);
+        for(int i = 0; i < studentList.size(); i++){
+            if (studentList.get(i).equals(member)) {
+                return i;
+            }
+        }
+        return 0;
     }
     /**
      * Method that prints the list of students in inputted class
      */
     public void printStudentList(Member instructor) {
         if (this.fitnessInstructor.equals(instructor)) {
-            int arraySize = classList.getSize();
+            int arraySize = studentList.size();
             for (int i = 0; i < arraySize; i++) {
-                if (classList.getSize() > 1){
-                    classList.print();
+                if (studentList.size() > 1){
+                    studentList.toString();
                 }
                 System.out.println ("empty class");
             }
@@ -60,10 +76,14 @@ public class FitnessClass {
      */
     public String removeStudent (Member cancelStudent) {
         if (this.classType.equals(classType)) {
-            for (int i = 0; i < classList.getSize(); i++) {
-                classList.remove(cancelStudent);
+            for (int i = 0; i < studentList.size(); i++) {
+                studentList.remove(cancelStudent);
             }
         }
         return cancelStudent.getfname() + " " + cancelStudent.getlname() +" is not a participant in " + classType;
+    }
+    @Override
+    public String toString(){
+        return classType.toUpperCase() + " - " + fitnessInstructor + ", " + Time.values() + ", " + location.values();
     }
 }

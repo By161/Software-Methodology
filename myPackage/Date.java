@@ -138,4 +138,10 @@ public class Date implements Comparable<Date> {
     public String toString(){
         return (this.month + "/" + this.day + "/" + this.year);
     }
+    public Date addThreeMonths() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, 3);
+        Date expireDate = new Date();
+        return expireDate;
+    }
 }

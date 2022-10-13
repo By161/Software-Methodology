@@ -1,9 +1,11 @@
-package Project2Folder;
-
-import java.lang.reflect.Member;
-
+import java.io.FileNotFoundException;
+import java.util.Calendar;
+import java.util.Scanner;
+import java.io.File;
+import myPackage.Date;
+import myPackage.Location;
 /** This class implements methods that handle the member database for the gym.
- * @author Anna Kryzanekas
+ * @author Anna Kryzanekas, Brandon Yuen
  */
 public class MemberDatabase {
     private Member[] mlist;
@@ -16,6 +18,10 @@ public class MemberDatabase {
      */
     public MemberDatabase() {
         this.mlist = new Member[size];
+    }
+
+    public int getSize() {
+        return this.size;
     }
 
     /**
@@ -55,7 +61,7 @@ public class MemberDatabase {
     public boolean add(Member member) {
         grow();
         if (find(member) != NOT_FOUND) {
-            System.out.println(member.getFirstName() + " " + member.getLastName() +
+            System.out.println(member.getfname() + " " + member.getlname() +
                     " is already in the database.");
             return false;
         }
@@ -63,7 +69,7 @@ public class MemberDatabase {
             for (int i = 0; i < size; i++) {
                 if (mlist[i] == null) {
                     mlist[i] = member;
-                    System.out.println(member.getFirstName() + " " + member.getLastName() + " added.");
+                    System.out.println(member.getfname() + " " + member.getlname() + " added.");
                     return true;
                 }
             }
@@ -85,10 +91,10 @@ public class MemberDatabase {
                 mlist[i] = mlist[i + 1];
                 mlist[i + 1] = null;
             }
-            System.out.println(member.getFirstName() + " " + member.getLastName() + " removed.");
+            System.out.println(member.getfname() + " " + member.getlname() + " removed.");
             return true;
         } else {
-            System.out.println(member.getFirstName() + " " + member.getLastName() + " is not in the database.");
+            System.out.println(member.getfname() + " " + member.getlname() + " is not in the database.");
             return false;
         }
     }
