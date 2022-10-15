@@ -210,8 +210,10 @@ public class GymManager {
      */
     public void run() throws FileNotFoundException {
         System.out.print("Gym Manager Running...");
+        Scanner sc = new Scanner(System.in);
         while(running){
-            String[] inputArray= processLine(inputLine);
+            String inputLine = sc.nextLine();
+            String[] inputArray = processLine(inputLine);
             if (inputLine.length() < 1){
                 continue;
             }

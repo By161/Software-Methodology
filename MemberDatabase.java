@@ -1,7 +1,3 @@
-
-import myPackage.Date;
-
-
 /** This class implements methods that handle the member database for the gym.
  * @author Anna Kryzanekas
  */
