@@ -1,10 +1,11 @@
 
 package myPackage;
+import java.lang.reflect.Member;
 import java.util.Calendar;
 /**
  * Date object class
  * This class creates an object for the dates to keep track of each member's memberships and dates of birth.
- * @author Brandon Yuen
+ * @author Brandon Yuen, Anna Kryzanekas
  */
 public class Date implements Comparable<Date> {
     private int year;
@@ -39,6 +40,7 @@ public class Date implements Comparable<Date> {
 
     /**
      * creates a new date object using a string input
+     *
      * @param date
      */
     public Date(String date) {
@@ -54,6 +56,7 @@ public class Date implements Comparable<Date> {
     /**
      * compares the two dates to see which one comes before the other and vice versa.
      * helps with membership expirations, class times, etc.
+     *
      * @param date the object to be compared.
      * @return 1 if today is past new date, return 0 if they are the same, return -1 if new date is after today.
      */
@@ -61,16 +64,16 @@ public class Date implements Comparable<Date> {
     public int compareTo(Date date) {
         Calendar calendar = Calendar.getInstance();
 
-        if (this.year < date.year){
+        if (this.year < date.year) {
             return 1;
         }
-        if (this.year == date.year && this.month < date.month){
+        if (this.year == date.year && this.month < date.month) {
             return 1;
         }
-        if (this.year == date.year && this.month == date.month && this.day < date.day){
+        if (this.year == date.year && this.month == date.month && this.day < date.day) {
             return 1;
         }
-        if (this.year == date.year && this.month == date.month && this.day == date.day){
+        if (this.year == date.year && this.month == date.month && this.day == date.day) {
             return 0;
         }
         return -1;
@@ -79,35 +82,36 @@ public class Date implements Comparable<Date> {
     /**
      * method to check if the input date is an actual date that exists in the calendar.
      * helps with verifying membership expiration, dates of bith, etc.
+     *
      * @return
      */
 
-    public boolean isValid () {
-        if (day == 0 || month == 0 || year == 0){
+    public boolean isValid() {
+        if (day == 0 || month == 0 || year == 0) {
             return false;
         }
-        if (month == FEBRUARY && day == LEAP){
-            if (year % QUADRENNIAL != 0){
+        if (month == FEBRUARY && day == LEAP) {
+            if (year % QUADRENNIAL != 0) {
                 return false;
             }
-            if (year % CENTENNIAL == 0 && year % QUATERCENTENNIAL != 0){
+            if (year % CENTENNIAL == 0 && year % QUATERCENTENNIAL != 0) {
                 return false;
             }
             return true;
         }
-        if (day < ZERO){
+        if (day < ZERO) {
             return false;
         }
-        if (day > BIGMONTH){
+        if (day > BIGMONTH) {
             return false;
         }
-        if ((month == APRIL || month == JUNE || month == SEPTEMBER || month == NOVEMBER) && (!(day <= SMALLMONTH))){
+        if ((month == APRIL || month == JUNE || month == SEPTEMBER || month == NOVEMBER) && (!(day <= SMALLMONTH))) {
             return false;
         }
-        if (month == FEBRUARY && day > NONLEAP){
+        if (month == FEBRUARY && day > NONLEAP) {
             return false;
         }
-        if (month > DECEMBER || month <= 0){
+        if (month > DECEMBER || month <= 0) {
             return false;
         }
         return true;
@@ -115,33 +119,72 @@ public class Date implements Comparable<Date> {
 
     /**
      * Getter method for other classes to get the month of the object.
+     *
      * @return
      */
-    public int getMonth(){
+    public int getMonth() {
         return month;
     }
+
     /**
      * Getter method for other classes to get the day of the object.
+     *
      * @return
      */
     public int getDay() {
         return day;
     }
+
     /**
      * Getter method for other classes to get the year of the object.
+     *
      * @return
      */
-    public int getYear(){
+    public int getYear() {
         return year;
     }
+
+    /**
+     * toString method for the Date class
+     *
+     * @return
+     */
     @Override
-    public String toString(){
+    public String toString() {
         return (this.month + "/" + this.day + "/" + this.year);
     }
+
+    /**
+     * Helper method to calculate the members expiration dates.
+     *
+     * @return
+     */
     public Date addThreeMonths() {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, 3);
         Date expireDate = new Date();
         return expireDate;
+    }
+    public boolean eighteenOrOlder(Date date) {
+        if (date.getYear() - getYear() > 18) {
+            return true;
+        }
+        else if (date.getYear() - getYear() == 18) {
+            if (date.getMonth() - getMonth() > 0) {
+                return true;
+            }
+            else if (date.getMonth() - getMonth() < 0) {
+                return false;
+            }
+            else {
+                if (date.getDay() - getDay() < 0) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

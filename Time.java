@@ -1,7 +1,7 @@
 /**
  *  The required enum class for Time
  *  This class shows the possible times and their constants that identify them.
- *  @author Brandon Yuen
+ * @author Brandon Yuen, Anna Kryzanekas
  */
 
 public enum Time {

@@ -2,7 +2,7 @@ package myPackage;
 /**
  *  The required enum class for location
  *  This class shows all the locations and their constants that identify them.
- *  @author Brandon Yuen
+ * @author Brandon Yuen, Anna Kryzanekas
  */
 public enum Location {
     BRIDGEWATER ("08807", "SOMERSET"),
@@ -24,10 +24,19 @@ public enum Location {
         this.zipcode = zipcode;
         this.county = county;
     }
+
+    /**
+     * Getter method for the location's county
+     * @return
+     */
     public String getCounty(){
         return this.county;
     }
 
+    /**
+     * Getter method for the location's zipcode
+     * @return
+     */
     public String getZipcode() {
         return zipcode;
     }

@@ -1,15 +1,8 @@
 import java.util.ArrayList;
-import java.io.FileNotFoundException;
-import java.util.Calendar;
-import java.util.Scanner;
-import java.io.File;
-
-import com.sun.jdi.ClassType;
-import myPackage.Date;
 import myPackage.Location;
 /**
  *  FitnessClass class that keeps track of all the gym classes available for members to sign up for
- *  @author Brandon Yuen
+ * @author Brandon Yuen, Anna Kryzanekas
  */
 public class FitnessClass {
     private String classType;
@@ -80,7 +73,7 @@ public class FitnessClass {
                 studentList.remove(cancelStudent);
             }
         }
-        return cancelStudent.getfname() + " " + cancelStudent.getlname() +" is not a participant in " + classType;
+        return cancelStudent.getFirstName() + " " + cancelStudent.getLastName() +" is not a participant in " + classType;
     }
     @Override
     public String toString(){

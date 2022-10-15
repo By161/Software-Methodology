@@ -1,5 +1,4 @@
 import java.io.FileNotFoundException;
-import java.util.Calendar;
 import java.util.Scanner;
 import java.io.File;
 import myPackage.Date;
@@ -7,13 +6,13 @@ import myPackage.Location;
 /**
  * GymManager class that handles all the functions that maintain the gym
  * Main class that is called to run the software
- * @author Brandon Yuen
+ * @author Brandon Yuen, Anna Kryzanekas
  */
 public class GymManager {
     private boolean running = true;
     MemberDatabase database = new MemberDatabase();
     String inputLine;
-    ClassSchedule schedule = new ClassSchedule();
+//    ClassSchedule schedule = new ClassSchedule();
     /**
      * Creates an array to split up the information in the input line
      * @param line
@@ -30,10 +29,41 @@ public class GymManager {
      */
     private void addNewMember(Member member){
         database.add(member);
-        member.getfname();
-        member.getlname();
+        member.getFirstName();
+        member.getLastName();
     }
+    /**
+     * Checks date of birth and expiration date to ensure that the member input is valid.
+     * @param member member wanting to be added to the database.
+     * @return true if member information is valid and false if it is not.
+     */
+    private boolean isValidMemberInput(Member member) {
+        //Create an instance variable of today's date
+        Date todayDate = new Date();
 
+        //Check that the member's expiration date is a valid date
+        if (!member.getExpire().isValid()) {
+            System.out.println("Expiration date " + member.getDob() + ": invalid calendar date!");
+            return false;
+        }
+        //Check that the member's date of birth is a valid date
+        if (!member.getDob().isValid()) {
+            System.out.println("DOB " + member.getDob() + ": invalid calendar date!");
+            return false;
+        }
+        //Check that the member's date of birth is not today or in the future
+        if (member.getDob().compareTo(todayDate) >= 0) {
+            System.out.println("DOB " + member.getDob() + ": cannot be today or a future date!");
+            return false;
+        }
+        //Check that the member is 18 or older
+        if (member.getDob().isValid() && !member.getDob().eighteenOrOlder(todayDate)) {
+            System.out.println("DOB " + member.getDob() + ": must be 18 or older to join!");
+            return false;
+        }
+        //Already checked for location so no need to do so
+        return true;
+    }
     /**
      * Method that takes the inputted member and removes them from the database
      * @param member
@@ -41,17 +71,36 @@ public class GymManager {
      */
     private String cancelMembership(Member member){
         database.remove(member);
-        return (member.getfname() + " " + member.getlname() + "removed.");
+        return (member.getFirstName() + " " + member.getLastName() + "removed.");
     }
-
     /**
      * helper method that performs the actions that the input A is intended to do
      * @param input
      */
     private void commandA(String input){
-
+        String[] processedInput = processLine(input);
+        Member tempMember = new Member (processedInput[1], processedInput[2], processedInput[3],processedInput[4]);
+        if(isValidMemberInput(tempMember)){
+            database.add(tempMember);
+        }
+        System.out.println(" ");
     }
-
+    private void commandAF(String input){
+        String[] processedInput = processLine(input);
+        Family tempMember = new Family (processedInput[1], processedInput[2], processedInput[3],processedInput[4]);
+        if(isValidMemberInput(tempMember)){
+            database.add(tempMember);
+        }
+        System.out.println(" ");
+    }
+    private void commandAP(String input){
+        String[] processedInput = processLine(input);
+        Premium tempMember = new Premium (processedInput[1], processedInput[2], processedInput[3],processedInput[4]);
+        if(isValidMemberInput(tempMember)){
+            database.add(tempMember);
+        }
+        System.out.println(" ");
+    }
     /**
      * helper method that performs the actions that the input R is intended to do
      * @param input
@@ -67,7 +116,6 @@ public class GymManager {
             System.out.println("Error");
         }
     }
-
     /**
      * helper method that performs the actions that the input P is intended to do
      * @param input
@@ -78,41 +126,27 @@ public class GymManager {
         }
         database.print();
     }
-
     /**
      * helper method that performs the actions that the input PD is intended to do
      */
     private void commandPD(){
         database.printByExpirationDate();
     }
-
     /**
      * helper method that performs the actions that the input PN is intended to do
      */
     private void commandPN(){
         database.printByName();
     }
-
     /**
      * helper method that performs the actions that the input PC is intended to do
      */
     private void commandPC(){
         database.printByCounty();
     }
+    private void commandCG(){
 
-    /**
-     * helper method that performs the actions that the input S is intended to do
-     */
-//    private void commandS (){
-//        System.out.println("-Fitness classes-\n");
-//        fitClassPilates.setClassTime(Time.MORNING);
-//        System.out.println(fitClassPilates.toString());
-//        fitClassSpin.setClassTime(Time.AFTERNOON);
-//        System.out.println(fitClassSpin.toString());
-//        fitClassCardio.setClassTime(Time.AFTERNOON);
-//        System.out.println(fitClassCardio.toString());
-//    }
-
+    }
     /**
      * helper method that performs the actions that the input C is intended to do
      * @param input
@@ -125,32 +159,50 @@ public class GymManager {
         String fname = processedInput[4];
         String lname = processedInput[5];
         String dateOfBirth = processedInput[6];
-        Date dob = new Date(dateOfBirth);
-        Member tempMember=  new Member (fname, lname, dob, Location.valueOf(location.toUpperCase()));
-
+        Member tempMember=  new Member (fname, lname, dateOfBirth, location);
+        FitnessClass tempClass = new FitnessClass(classType, fitnessInstructor, null, Location.valueOf(location.toUpperCase()));
+//        if (schedule.hasClass(tempClass)){
+//            schedule.getClass(tempClass).addStudent(tempMember);
+        }
+//        System.out.println("Class does not exist within the schedule");
+//    }
+    private void commandPF(){
+        database.printWithFees();
     }
+
+    /**
+     * Helper method that performs the actions that the input LS is intended to do
+     * @throws FileNotFoundException
+     */
     public void commandLS() throws FileNotFoundException {
-        File file = new File("C:\\Users\\SPCHB\\Downloads\\classSchedule.txt"); //file path
+        File file = new File("C:\\Users\\Brandon\\Downloads\\classSchedule.txt"); //file path
         Scanner sc = new Scanner(file);
         System.out.println("-Fitness classes loaded-");
+        String[] processedInput =  processLine(sc.nextLine());
         while (sc.hasNextLine()) {
-            String[] processedInput = processLine(sc.nextLine());
             String classType = processedInput[0];
             String instructor = processedInput[1];
-            Time classTime = Time.valueOf(processedInput[3].toUpperCase());
-            Location location = Location.valueOf(processedInput[4].toUpperCase());
-            FitnessClass newClass = new FitnessClass(classType, instructor, classTime, location);
-            schedule.addClass(newClass);
+            String time = processedInput[2];
+            String location = processedInput[3];
+            FitnessClass newClass = new FitnessClass(classType,instructor,Time.valueOf(time.toUpperCase()), Location.valueOf(location.toUpperCase()));
+//            schedule.addClass(newClass);
+//            schedule.printClasses();
         }
     }
+
+    /**
+     * Helper method that performs the actions that the input LM is intended to do
+     * @throws FileNotFoundException
+     */
     private void commandLM() throws FileNotFoundException {
-        File file = new File("C:\\Users\\SPCHB\\Downloads\\memberList.txt"); //file path
+        File file = new File("C:\\Users\\Brandon\\Downloads\\memberList.txt"); //file path
         Scanner sc = new Scanner(file);
         System.out.println("-list of members loaded-");
         while (sc.hasNextLine()){                                       //reads all lines as long as there is another line after it
             String[] processedInput =  processLine(sc.nextLine());
-            Member tempMember = new Member (processedInput[1], processedInput[2], new Date(processedInput[3]), Location.valueOf(processedInput[5].toUpperCase()));
+            Member tempMember = new Member (processedInput[1], processedInput[2], processedInput[3], processedInput[5]);
             addNewMember(tempMember);
+            System.out.println(tempMember);
         }
     }
     /**
@@ -171,10 +223,12 @@ public class GymManager {
                 case "PD" -> commandPD();
                 case "PN" -> commandPN();
                 case "PC" -> commandPC();
-//                case "S" -> commandS();
-//                case "C" -> commandC(inputLine);
+                case "C" -> commandC(inputLine);
                 case "LS" -> commandLS();
                 case "LM" -> commandLM();
+                case "PF" -> commandPF();
+                case "AF" -> commandAF(inputLine);
+                case "AP" -> commandAP(inputLine);
                 case "Q" -> {
                     System.out.println("Gym Manager terminated.");
                     running = false;
@@ -182,28 +236,6 @@ public class GymManager {
                 default -> System.out.println(command + " is an invalid command!");
             }
         }
-    }
-
-    /**
-     * Helper method that calculates the members age and see if they are at least 18
-     * @param member
-     * @return boolean value of whether or not they are at least 18 years of age
-     */
-    public boolean is18 (Member member){
-        Calendar calendar = Calendar.getInstance();
-        if (calendar.get(Calendar.YEAR) - member.getdob().getYear() < 18){
-            return false;
-        }
-        if (calendar.get(Calendar.YEAR) - member.getdob().getYear() == 18 && calendar.get(Calendar.MONTH ) + 1 - member.getdob().getMonth() < 0){
-            return false;
-        }
-        if (calendar.get(Calendar.YEAR) - member.getdob().getYear() == 18 && calendar.get(Calendar.MONTH) + 1 - member.getdob().getMonth() == 0 && calendar.get(Calendar.DATE) - member.getdob().getDay() < 0){
-            return false;
-        }
-        if(!member.getdob().isValid()){
-            return false;
-        }
-        return true;
     }
 }
 
