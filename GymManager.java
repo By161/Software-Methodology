@@ -326,7 +326,7 @@ public class GymManager {
     }
     /**
      * Helper method that performs the actions that the input LS is intended to do
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException Signals that an attempt to open the file denoted by a specified pathname has failed.
      */
     public void commandLS () throws FileNotFoundException {
         File file = new File("classSchedule.txt"); //file path
@@ -349,7 +349,7 @@ public class GymManager {
     }
     /**
      * Helper method that performs the actions that the input LM is intended to do
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException Signals that an attempt to open the file denoted by a specified pathname has failed.
      */
     private void commandLM () throws FileNotFoundException {
         File file = new File("memberList.txt"); //file path
@@ -366,8 +366,10 @@ public class GymManager {
             System.out.println(tempMember);
         }
     }
+
     /**
-     * Method that runs the program based off the inputted command
+     * Run method that calls all the necessary helper methods for the respective command
+     * @throws FileNotFoundException Signals that an attempt to open the file denoted by a specified pathname has failed.
      */
     public void run () throws FileNotFoundException {
         System.out.print("Gym Manager Running...");

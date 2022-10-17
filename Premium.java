@@ -2,6 +2,10 @@ import myPackage.Date;
 import myPackage.Location;
 import java.util.Calendar;
 
+/**
+ * Required Premium class that makes an object to represent the Premium version of a membership
+ * @author Brandon Yuen, Anna Kryzanekas
+ */
 public class Premium extends Family {
 
     private int numPremGuestPasses = 3; //decrease number every time you check in a guest
@@ -13,7 +17,7 @@ public class Premium extends Family {
      * @param firstName the first name of a member.
      * @param lastName  the last name of a member.
      * @param dob       the date of birth of a member.
-     * @param expire
+     * @param expire    the date of when the member's membership expires
      * @param location  the member's gym location including town, county, and zip code.
      */
     public Premium(String firstName, String lastName, String dob, Date expire, Location location) {
