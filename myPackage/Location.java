@@ -17,8 +17,8 @@ public enum Location {
     /**
      * Constructor method for location.
      * creates an object called Location to help the other classes identify what location the member is at.
-     * @param zipcode
-     * @param county
+     * @param zipcode The location's zipcode
+     * @param county The location's county
      */
     Location(String zipcode, String county){
         this.zipcode = zipcode;
@@ -27,7 +27,7 @@ public enum Location {
 
     /**
      * Getter method for the location's county
-     * @return
+     * @return the location's county
      */
     public String getCounty(){
         return this.county;
@@ -35,7 +35,7 @@ public enum Location {
 
     /**
      * Getter method for the location's zipcode
-     * @return
+     * @return the location's Zipcode
      */
     public String getZipcode() {
         return zipcode;
