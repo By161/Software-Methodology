@@ -38,7 +38,7 @@ public class Date implements Comparable<Date> {
 
     /**
      * creates a new date object using a string input
-     * @param date
+     * @param date String representation of a date that needs to be converted into a date object
      */
     public Date(String date) {
         String[] arrayDate = date.split("/");
@@ -77,8 +77,8 @@ public class Date implements Comparable<Date> {
 
     /**
      * method to check if the input date is an actual date that exists in the calendar.
-     * helps with verifying membership expiration, dates of bith, etc.
-     * @return
+     * helps with verifying membership expiration, dates of birth, etc.
+     * @return True if the date is a valid date that exists within the calendar, false otherwise.
      */
     public boolean isValid() {
         if (day == 0 || month == 0 || year == 0) {
@@ -112,28 +112,28 @@ public class Date implements Comparable<Date> {
     }
     /**
      * Getter method for other classes to get the month of the object.
-     * @return
+     * @return the month
      */
     public int getMonth() {
         return month;
     }
     /**
      * Getter method for other classes to get the day of the object.
-     * @return
+     * @return the day
      */
     public int getDay() {
         return day;
     }
     /**
      * Getter method for other classes to get the year of the object.
-     * @return
+     * @return the year
      */
     public int getYear() {
         return year;
     }
     /**
      * toString method for the Date class
-     * @return
+     * @return String representation of the date
      */
     @Override
     public String toString() {
@@ -141,7 +141,7 @@ public class Date implements Comparable<Date> {
     }
     /**
      * Helper method to calculate the members expiration dates.
-     * @return
+     * @return new date that has been incremented by 3 months
      */
     public Date addThreeMonths() {
         Calendar calendar = Calendar.getInstance();
@@ -151,7 +151,7 @@ public class Date implements Comparable<Date> {
     }
     /**
      * Helper method that checks if a member is 18 old or older
-     * @param date
+     * @param date inputted date that usually represents a member's Date of Birth to check if they are atleast 18 years old
      * @return True if the member is of age based off the inputted date of birth, or false if they are younger than 18
      */
     public boolean eighteenOrOlder(Date date) {
