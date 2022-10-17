@@ -1,9 +1,7 @@
 import java.util.ArrayList;
-import java.util.StringTokenizer;
-import java.io.PrintStream;
 import myPackage.Location;
 /**
- *  FitnessClass class that keeps track of all the gym classes available for members to sign up for
+ * FitnessClass class that keeps track of all the gym classes available for members to sign up for
  * @author Brandon Yuen, Anna Kryzanekas
  */
 public class FitnessClass {
@@ -17,42 +15,21 @@ public class FitnessClass {
 
     /**
      * Constructor for the FitnessClass object
-     *
      * @param classType
      * @param instructorName
      * @param classStartingTime
      */
-    public FitnessClass(String classType, String instructorName, Time classStartingTime, String location) {
+    public FitnessClass(String classType, String instructorName, Time classStartingTime, Location location) {
         this.classType = classType;
         this.fitnessInstructor = instructorName;
         this.classTime = classStartingTime;
-        if (location.equalsIgnoreCase("piscataway")) {
-            this.location = Location.PISCATAWAY;
-        } else if (location.equalsIgnoreCase("bridgewater")) {
-            this.location = Location.BRIDGEWATER;
-        } else if (location.equalsIgnoreCase("edison")) {
-            this.location = Location.EDISON;
-        } else if (location.equalsIgnoreCase("franklin")) {
-            this.location = Location.FRANKLIN;
-        } else {
-            this.location = Location.SOMERVILLE;
-        }
-
+        this.location = location;
     }
 
-    /**
-     * Getter method for the classType
-     *
-     * @return
-     */
-    public String getClassType() {
-        return classType;
-    }
 
     /**
      * Method that adds students to the list when they want to check-in
-     *
-     * @param member
+     * @param member object that is meant to be added to the class
      */
     public void addStudent(Member member) {
         studentList.add(member);
@@ -87,8 +64,7 @@ public class FitnessClass {
 
     /**
      * Method to remove a student from the class list if they decide they do not want to go to the class anymore
-     *
-     * @param cancelStudent
+     * @param cancelStudent the student that is meant to be removed
      * @return new array with updated information and the cancelled student is removed.
      */
     public String removeStudent(Member cancelStudent) {
@@ -100,11 +76,18 @@ public class FitnessClass {
         return cancelStudent.getFirstName() + " " + cancelStudent.getLastName() + " is not a participant in " + classType;
     }
 
+    /**
+     * toString method to create a string representation of the FitnessClass
+     * @return a string that represents the FitnessClass information in the desired format
+     */
     @Override
     public String toString() {
         return classType.toUpperCase() + " - " + fitnessInstructor + ", " + Time.values() + ", " + location.values();
     }
 
+    /**
+     * Helper method that prints class information.
+     */
     public void printClass() {
         String strClassType = this.classType.toUpperCase();
         System.out.println(strClassType + " - " + this.fitnessInstructor.toUpperCase() + ", " + this.classTime.getHour() + ":" + this.classTime.getMinute() + ", " + this.location.toString());

@@ -1,5 +1,5 @@
 import myPackage.Date;
-
+import myPackage.Location;
 import java.util.Calendar;
 
 public class Premium extends Family {
@@ -16,7 +16,7 @@ public class Premium extends Family {
      * @param expire
      * @param location  the member's gym location including town, county, and zip code.
      */
-    public Premium(String firstName, String lastName, String dob, Date expire, String location) {
+    public Premium(String firstName, String lastName, String dob, Date expire, Location location) {
         super(firstName, lastName, dob, expire, location); //invoke the superclass constructor
     }
 

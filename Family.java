@@ -1,4 +1,5 @@
 import myPackage.Date;
+import myPackage.Location;
 /**
  * required class to make the Family membership type object
  * @author Anna Kryzanekas, Brandon Yuen
@@ -6,7 +7,7 @@ import myPackage.Date;
 
 public class Family extends Member{
 
-    public int numFamGuestPasses = 1; //decrease number every time you check in a guest
+    public int numFamGuestPasses; //decrease number every time you check in a guest
 
 
     /**
@@ -16,11 +17,15 @@ public class Family extends Member{
      * @param dob       the date of birth of a member.
      * @param location  the member's gym location including town, county, and zip code.
      */
-    public Family(String firstName, String lastName, String dob, Date expire, String location) {
+    public Family(String firstName, String lastName, String dob, Date expire, Location location) {
         super(firstName, lastName, dob, expire, location); //invoke the superclass constructor
         this.numFamGuestPasses = 1;
     }
 
+    /**
+     * Polymorphism method that returns the membership fee for a family type member
+     * @return the membership fee for a family type member
+     */
     @Override
     public double membershipFee() {
         return 209.96;
@@ -34,12 +39,5 @@ public class Family extends Member{
     public String toString() {
         return super.toString() + ", (Family) guest-pass remaining: " + numFamGuestPasses;
     }
-
-    //Any location
-    //1 guest pass - only for membership location
-
-
-
-
 
 }

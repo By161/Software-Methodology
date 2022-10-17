@@ -6,6 +6,9 @@ public class ClassSchedule {
     private FitnessClass[] classes;
     private int numClasses;
 
+    /**
+     * ClassSchedule object constructor
+     */
     public ClassSchedule() {
         numClasses = 0;
         classes = new FitnessClass[numClasses];
@@ -19,11 +22,24 @@ public class ClassSchedule {
         classes = tempClasses;
         numClasses++;
     }
+
+    /**
+     * Helper method that prints the class schedule
+     */
     public void printSchedule(){
+        if (numClasses == 0){
+            System.out.println("Fitness class schedule is empty.");
+        }
         for (int i = 0; i < numClasses; i++){
             classes[i].printClass();
         }
     }
+
+    /**
+     * Helper method that finds the inputted FitnessClass within the class schedule.
+     * @param classFromData
+     * @return index of the inputted FitnessClass within the class schedule.
+     */
     private int find(FitnessClass classFromData) {
         for (int i = 0; i < this.numClasses; ++i) {
             if (this.classes[i] != null && this.classes[i].equals(classFromData)) {
@@ -32,6 +48,12 @@ public class ClassSchedule {
         }
         return -1;
     }
+
+    /**
+     * Helper method that checks if the schedule has the inputted FitnessClass within today's schedule
+     * @param fitnessClass
+     * @return true if inputted FitnessClass is within the schedule, or false if it is not in the schedule
+     */
     public boolean hasClass(FitnessClass fitnessClass){
         for (int i =0; i < numClasses; i++){
             if (classes[i].equals(fitnessClass));
@@ -40,41 +62,16 @@ public class ClassSchedule {
         return false;
     }
 
-    public FitnessClass findClass(FitnessClass classFromData) {
-        int indexOfClass = find(classFromData);
-        if (indexOfClass != -1) {
-            FitnessClass actualClass = classes[indexOfClass];
-            return actualClass;
-        }
-        else {
-            return null;
-        }
-    }
-    public FitnessClass[] getClasses () {
-        return classes;
-    }
-    public int getNumClasses () {
-        return numClasses;
-    }
+    /**
+     * Getter method for the inputted class within the schedule
+     * @param fitnessClass
+     * @return the desired class from the schedule
+     */
     public FitnessClass getClass(FitnessClass fitnessClass){
         for (int i =0; i < numClasses; i++){
             if (classes[i].equals(fitnessClass));
             return classes[i];
         }
         return null;
-    }
-    public void print() {
-        if (this.classes[0] == null) {
-            System.out.println("no classes");
-        } else {
-            System.out.println();
-            System.out.println("- list of classes -");
-
-            for(int i = 0; i < this.numClasses && this.classes[i] != null; i++) {
-                this.classes[i].printClass();
-            }
-            System.out.println("- end of list -");
-            System.out.println();
-        }
     }
 }

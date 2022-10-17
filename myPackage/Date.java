@@ -1,4 +1,3 @@
-
 package myPackage;
 import java.util.Calendar;
 /**
@@ -39,7 +38,6 @@ public class Date implements Comparable<Date> {
 
     /**
      * creates a new date object using a string input
-     *
      * @param date
      */
     public Date(String date) {
@@ -55,7 +53,6 @@ public class Date implements Comparable<Date> {
     /**
      * compares the two dates to see which one comes before the other and vice versa.
      * helps with membership expirations, class times, etc.
-     *
      * @param date the object to be compared.
      * @return 1 if today is past new date, return 0 if they are the same, return -1 if new date is after today.
      */
@@ -81,10 +78,8 @@ public class Date implements Comparable<Date> {
     /**
      * method to check if the input date is an actual date that exists in the calendar.
      * helps with verifying membership expiration, dates of bith, etc.
-     *
      * @return
      */
-
     public boolean isValid() {
         if (day == 0 || month == 0 || year == 0) {
             return false;
@@ -115,47 +110,37 @@ public class Date implements Comparable<Date> {
         }
         return true;
     }
-
     /**
      * Getter method for other classes to get the month of the object.
-     *
      * @return
      */
     public int getMonth() {
         return month;
     }
-
     /**
      * Getter method for other classes to get the day of the object.
-     *
      * @return
      */
     public int getDay() {
         return day;
     }
-
     /**
      * Getter method for other classes to get the year of the object.
-     *
      * @return
      */
     public int getYear() {
         return year;
     }
-
     /**
      * toString method for the Date class
-     *
      * @return
      */
     @Override
     public String toString() {
         return (this.month + "/" + this.day + "/" + this.year);
     }
-
     /**
      * Helper method to calculate the members expiration dates.
-     *
      * @return
      */
     public Date addThreeMonths() {
@@ -164,6 +149,11 @@ public class Date implements Comparable<Date> {
         Date expireDate = new Date();
         return expireDate;
     }
+    /**
+     * Helper method that checks if a member is 18 old or older
+     * @param date
+     * @return True if the member is of age based off the inputted date of birth, or false if they are younger than 18
+     */
     public boolean eighteenOrOlder(Date date) {
         if (date.getYear() - getYear() > 18) {
             return true;

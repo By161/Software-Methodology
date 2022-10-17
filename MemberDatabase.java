@@ -27,7 +27,7 @@ public class MemberDatabase {
      * @param member inputted gym member.
      * @return the index of the member if found and NOT_FOUND if the member is not in the list.
      */
-    int find(Member member) {
+    public int find(Member member) {
         for (int i = 0; i < size; i++) {
             if (mlist[i] != null && mlist[i].equals(member)) {
                 return i;
@@ -53,7 +53,6 @@ public class MemberDatabase {
 
     /**
      * Adds a member to the database if they are not already in the list.
-     *
      * @param member current member being added to the database.
      * @return true once the member is successfully added and false if not.
      */
@@ -73,10 +72,8 @@ public class MemberDatabase {
         }
         return false;
     }
-
     /**
      * Removes a member from the database if they are in the list.
-     *
      * @param member current member that wants to be removed from the database.
      * @return true if the member is successfully removed from the database and false if the member
      * is not in the database to begin with.
@@ -96,7 +93,6 @@ public class MemberDatabase {
             return false;
         }
     }
-
     /**
      * Prints the array contents as is.
      */
@@ -115,7 +111,6 @@ public class MemberDatabase {
             System.out.println();
         }
     }
-
     /**
      * Prints the array contents for the sorting methods.
      */
@@ -132,7 +127,6 @@ public class MemberDatabase {
             System.out.println();
         }
     }
-
     /**
      * Prints the array contents for the fee method.
      */
@@ -150,7 +144,6 @@ public class MemberDatabase {
             System.out.println();
         }
     }
-
     /**
      * Sorts the database by county and then zipcode of members. This method uses insertion sort.
      */
@@ -166,7 +159,6 @@ public class MemberDatabase {
                     continue;
                 }
                 int j = i - 1;
-
                 while (j >= 0 && (key.getLocation().getCounty().compareTo((mlist[j].getLocation().getCounty())) < 0
                         || (key.getLocation().getCounty().compareTo(mlist[j].getLocation().getCounty()) == 0
                         && key.getLocation().getZipcode().compareTo(mlist[j].getLocation().getZipcode()) < 0))) {
@@ -178,7 +170,6 @@ public class MemberDatabase {
         }
         printForSort();
     }
-
     /**
      * Sorts the database by the expiration dates of members. This method uses insertion sort.
      */
@@ -204,7 +195,6 @@ public class MemberDatabase {
         }
         printForSort();
     }
-
     /**
      * Sorts the database by last name and then first name of members. This method uses insertion sort.
      */
@@ -230,7 +220,6 @@ public class MemberDatabase {
         }
         printForSort();
     }
-
     /**
      * Sorts the database by last name and then first name of members. This method uses insertion sort.
      */
