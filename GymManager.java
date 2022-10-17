@@ -102,6 +102,7 @@ public class GymManager {
         Family tempMember = new Family (processedInput[1], processedInput[2], processedInput[3], expire, processedInput[4]);
         if(isValidMemberInput(tempMember)){
             database.add(tempMember);
+            System.out.println(processedInput[1] + " " + processedInput[2] + " added.");
         }
         System.out.println(" ");
     }
@@ -116,6 +117,7 @@ public class GymManager {
         Premium tempMember = new Premium (processedInput[1], processedInput[2], processedInput[3], expire, processedInput[4]);
         if(isValidMemberInput(tempMember)){
             database.add(tempMember);
+            System.out.println(processedInput[1] + " " + processedInput[2] + " added.");
         }
         System.out.println(" ");
     }
@@ -220,7 +222,7 @@ public class GymManager {
      * @throws FileNotFoundException
      */
     public void commandLS() throws FileNotFoundException {
-        File file = new File("C:\\Users\\SPCHB\\Downloads\\classSchedule.txt"); //file path
+        File file = new File("classSchedule.txt"); //file path
         Scanner sc = new Scanner(file);
         System.out.println("-Fitness classes loaded-");
         while (sc.hasNextLine()) {
@@ -244,7 +246,7 @@ public class GymManager {
      * @throws FileNotFoundException
      */
     private void commandLM() throws FileNotFoundException {
-        File file = new File("C:\\Users\\SPCHB\\Downloads\\memberList.txt"); //file path
+        File file = new File("memberList.txt"); //file path
         Scanner sc = new Scanner(file);
         System.out.println("-list of members loaded-");
         while (sc.hasNextLine()){                                       //reads all lines as long as there is another line after it
