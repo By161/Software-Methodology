@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 /**
  * Class that runs project 2
  * Calls the gym manager class and run method inside that class
- * @author Brandon Yuen
+ * @author Brandon Yuen, Anna Kryzanekas
  */
 public class RunProject2 {
     /**

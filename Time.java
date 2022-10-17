@@ -5,13 +5,13 @@
  */
 
 public enum Time {
-    MORNING(9,30),
-    AFTERNOON(14,00),
-    EVENING(18,30);
+    MORNING(9,"30"),
+    AFTERNOON(14,"00"),
+    EVENING(18,"30");
 
 
     private final int hour;
-    private final int minute;
+    private final String minute;
 
     /**
      * Time constructor class.
@@ -19,8 +19,14 @@ public enum Time {
      * @param hour
      * @param minute
      */
-    Time(int hour, int minute){
+    Time(int hour, String minute){
         this.hour = hour;
         this.minute = minute;
+    }
+    public int getHour(){
+        return this.hour;
+    }
+    public String getMinute(){
+        return this.minute;
     }
 }

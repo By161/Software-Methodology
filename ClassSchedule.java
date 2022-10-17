@@ -1,68 +1,80 @@
-///**
-// * Required ClassSchedule class to make the schedule object that keeps track of all the gym classes happening at the time.
-// * @author Brandon Yuen, Anna Kryzanekas
-// */
-//public class ClassSchedule extends GymManager {
-//
-//    private FitnessClass[] classes;
-//    private int numClasses;
-//
-//    /**
-//     * Constructor method to create the ClassSchedule object
-//     */
-//    public ClassSchedule(){
-//        classes = null;
-//        numClasses = 0;
-//    }
-//
-//    /**
-//     * Helper method that returns all the classes within the schedule "database" to print in the gym manager class.
-//     */
-//    public void printClasses(){
-//        for(int i = 0; i < classes.length; i++){
-//            classes[i].toString();
-//        }
-//    }
-//    /**
-//     * Helper method that adds the classes to the schedule when loading the class schedule file.
-//     * @param fitnessclass
-//     * @return
-//     */
-//    public boolean addClass(FitnessClass fitnessclass){
-//        if (classes[numClasses - 1] != null) {
-//            for (int i = 0; i < numClasses; i++) {
-//                if (classes[i] == null){
-//                    classes[i] = fitnessclass;
-//                }
-//            }
-//            classes = new FitnessClass[numClasses++];
-//            return true;
-//        }
-//        return false;
-//    }
-//    /**
-//     * Helper method that checks if the inputted class exists within the schedule.
-//     * @param fitnessClass
-//     * @return
-//     */
-//    public boolean hasClass(FitnessClass fitnessClass){
-//        for (int i =0; i < numClasses; i++){
-//            if (classes[i].equals(fitnessClass));
-//            return true;
-//        }
-//        return false;
-//    }
-//
-//    /**
-//     * Helper method that returns the inputted class for easier access from the GymManager class
-//     * @param fitnessClass
-//     * @return
-//     */
-//    public FitnessClass getClass(FitnessClass fitnessClass){
-//        for (int i =0; i < numClasses; i++){
-//            if (classes[i].equals(fitnessClass));
-//            return classes[i];
-//        }
-//        return null;
-//    }
-//}
+/**
+ * Required class that makes the ClassSchedule object to keep track of all the classes being held at the gym
+ * @author Brandon Yuen, Anna Kryzanekas
+ */
+public class ClassSchedule {
+    private FitnessClass[] classes;
+    private int numClasses;
+
+    public ClassSchedule() {
+        numClasses = 0;
+        classes = new FitnessClass[numClasses];
+    }
+    public void addClass(FitnessClass newClass) {
+        FitnessClass[] tempClasses = new FitnessClass[numClasses + 1];
+        tempClasses[numClasses] = newClass;
+        for (int i = 0; i < numClasses; i++) {
+            tempClasses[i] = classes[i];
+        }
+        classes = tempClasses;
+        numClasses++;
+    }
+    public void printSchedule(){
+        for (int i = 0; i < numClasses; i++){
+            classes[i].printClass();
+        }
+    }
+    private int find(FitnessClass classFromData) {
+        for (int i = 0; i < this.numClasses; ++i) {
+            if (this.classes[i] != null && this.classes[i].equals(classFromData)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    public boolean hasClass(FitnessClass fitnessClass){
+        for (int i =0; i < numClasses; i++){
+            if (classes[i].equals(fitnessClass));
+            return true;
+        }
+        return false;
+    }
+
+    public FitnessClass findClass(FitnessClass classFromData) {
+        int indexOfClass = find(classFromData);
+        if (indexOfClass != -1) {
+            FitnessClass actualClass = classes[indexOfClass];
+            return actualClass;
+        }
+        else {
+            return null;
+        }
+    }
+    public FitnessClass[] getClasses () {
+        return classes;
+    }
+    public int getNumClasses () {
+        return numClasses;
+    }
+    public FitnessClass getClass(FitnessClass fitnessClass){
+        for (int i =0; i < numClasses; i++){
+            if (classes[i].equals(fitnessClass));
+            return classes[i];
+        }
+        return null;
+    }
+    public void print() {
+        if (this.classes[0] == null) {
+            System.out.println("no classes");
+        } else {
+            System.out.println();
+            System.out.println("- list of classes -");
+
+            for(int i = 0; i < this.numClasses && this.classes[i] != null; i++) {
+                this.classes[i].printClass();
+            }
+            System.out.println("- end of list -");
+            System.out.println();
+        }
+    }
+}

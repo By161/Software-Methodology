@@ -1,5 +1,5 @@
 /** This class implements methods that handle the member database for the gym.
- * @author Anna Kryzanekas
+ * @author Anna Kryzanekas, Brandon Yuen
  */
 public class MemberDatabase {
     private Member[] mlist;
@@ -17,6 +17,9 @@ public class MemberDatabase {
     public int getSize() {
         return this.size;
     }
+    public Member[] getMembers() {
+        return this.mlist;
+    }
 
     /**
      * Searches for a member in the database.
@@ -24,7 +27,7 @@ public class MemberDatabase {
      * @param member inputted gym member.
      * @return the index of the member if found and NOT_FOUND if the member is not in the list.
      */
-    private int find(Member member) {
+    int find(Member member) {
         for (int i = 0; i < size; i++) {
             if (mlist[i] != null && mlist[i].equals(member)) {
                 return i;
@@ -64,7 +67,6 @@ public class MemberDatabase {
             for (int i = 0; i < size; i++) {
                 if (mlist[i] == null) {
                     mlist[i] = member;
-                    System.out.println(member.getFirstName() + " " + member.getLastName() + " added.");
                     return true;
                 }
             }

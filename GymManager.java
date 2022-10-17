@@ -1,8 +1,9 @@
 import java.io.FileNotFoundException;
+import java.util.Calendar;
 import java.util.Scanner;
 import java.io.File;
 import myPackage.Date;
-import myPackage.Location;
+
 /**
  * GymManager class that handles all the functions that maintain the gym
  * Main class that is called to run the software
@@ -11,8 +12,7 @@ import myPackage.Location;
 public class GymManager {
     private boolean running = true;
     MemberDatabase database = new MemberDatabase();
-    String inputLine;
-//    ClassSchedule schedule = new ClassSchedule();
+   ClassSchedule schedule = new ClassSchedule();
     /**
      * Creates an array to split up the information in the input line
      * @param line
@@ -52,7 +52,7 @@ public class GymManager {
             return false;
         }
         //Check that the member's date of birth is not today or in the future
-        if (member.getDob().compareTo(todayDate) >= 0) {
+        if (member.getDob().compareTo(todayDate) <= 0) {
             System.out.println("DOB " + member.getDob() + ": cannot be today or a future date!");
             return false;
         }
@@ -79,23 +79,41 @@ public class GymManager {
      */
     private void commandA(String input){
         String[] processedInput = processLine(input);
-        Member tempMember = new Member (processedInput[1], processedInput[2], processedInput[3],processedInput[4]);
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, 3);
+        Date todayDate = new Date();
+        Date expire = todayDate.addThreeMonths();
+        Member tempMember = new Member (processedInput[1], processedInput[2], processedInput[3], expire, processedInput[4]);
         if(isValidMemberInput(tempMember)){
             database.add(tempMember);
+            System.out.println(processedInput[1] + " " + processedInput[2] + " added.");
         }
         System.out.println(" ");
     }
+
+    /**
+     * Helper method that performs the actions that the input AF is intended to do
+     * @param input
+     */
     private void commandAF(String input){
         String[] processedInput = processLine(input);
-        Family tempMember = new Family (processedInput[1], processedInput[2], processedInput[3],processedInput[4]);
+        Date todayDate = new Date();
+        Date expire = todayDate.addThreeMonths();
+        Family tempMember = new Family (processedInput[1], processedInput[2], processedInput[3], expire, processedInput[4]);
         if(isValidMemberInput(tempMember)){
             database.add(tempMember);
         }
         System.out.println(" ");
     }
+    /**
+     * Helper method that performs the actions that the input AP is intended to do
+     * @param input
+     */
     private void commandAP(String input){
         String[] processedInput = processLine(input);
-        Premium tempMember = new Premium (processedInput[1], processedInput[2], processedInput[3],processedInput[4]);
+        Date todayDate = new Date();
+        Date expire = todayDate.addThreeMonths();
+        Premium tempMember = new Premium (processedInput[1], processedInput[2], processedInput[3], expire, processedInput[4]);
         if(isValidMemberInput(tempMember)){
             database.add(tempMember);
         }
@@ -107,7 +125,7 @@ public class GymManager {
      */
     private void commandR(String input){
         String[] processedInput = processLine(input);
-        Member tempMember = new Member (processedInput[1], processedInput[2], null, null);
+        Member tempMember = new Member (processedInput[1], processedInput[2], null, null, null);
         if (processedInput.length == 4) {
             database.remove(tempMember);
             System.out.println(processedInput[1] + " " + processedInput[2] + " removed");
@@ -159,15 +177,42 @@ public class GymManager {
         String fname = processedInput[4];
         String lname = processedInput[5];
         String dateOfBirth = processedInput[6];
-        Member tempMember=  new Member (fname, lname, dateOfBirth, location);
-        FitnessClass tempClass = new FitnessClass(classType, fitnessInstructor, null, Location.valueOf(location.toUpperCase()));
-//        if (schedule.hasClass(tempClass)){
-//            schedule.getClass(tempClass).addStudent(tempMember);
+        Member tempMember=  new Member (fname, lname, dateOfBirth, null, location);
+        FitnessClass tempClass = new FitnessClass(classType, fitnessInstructor, null, location.toUpperCase());
+      if (schedule.hasClass(tempClass)){
+            schedule.getClass(tempClass).addStudent(tempMember);
         }
-//        System.out.println("Class does not exist within the schedule");
-//    }
+    }
     private void commandPF(){
         database.printWithFees();
+    }
+    private void commandD(String input){
+        String[] processedInput = processLine(input);
+        String classType = processedInput[1];
+        String fitnessInstructor = processedInput[2];
+        String location = processedInput[3];
+        String fname = processedInput[4];
+        String lname = processedInput[5];
+        String dateOfBirth = processedInput[6];
+        Member tempMember=  new Member (fname, lname, dateOfBirth, null, location);
+        FitnessClass tempClass = new FitnessClass(classType, fitnessInstructor, null, location.toUpperCase());
+        if(schedule.hasClass(tempClass)){
+            schedule.getClass(tempClass).removeStudent(tempMember);
+        }
+    }
+    private void commandDG(String input){
+        String[] processedInput = processLine(input);
+        String classType = processedInput[1];
+        String fitnessInstructor = processedInput[2];
+        String location = processedInput[3];
+        String fname = processedInput[4];
+        String lname = processedInput[5];
+        String dateOfBirth = processedInput[6];
+        Member tempMember=  new Member (fname, lname, dateOfBirth, null, location);
+        FitnessClass tempClass = new FitnessClass(classType, fitnessInstructor, null, location.toUpperCase());
+        if(schedule.hasClass(tempClass)){
+            schedule.getClass(tempClass).removeStudent(tempMember);
+        }
     }
 
     /**
@@ -175,19 +220,23 @@ public class GymManager {
      * @throws FileNotFoundException
      */
     public void commandLS() throws FileNotFoundException {
-        File file = new File("C:\\Users\\Brandon\\Downloads\\classSchedule.txt"); //file path
+        File file = new File("C:\\Users\\SPCHB\\Downloads\\classSchedule.txt"); //file path
         Scanner sc = new Scanner(file);
         System.out.println("-Fitness classes loaded-");
-        String[] processedInput =  processLine(sc.nextLine());
         while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+            if (line.length() < 1){
+                continue;
+            }
+            String[] processedInput =  processLine(line);
             String classType = processedInput[0];
             String instructor = processedInput[1];
             String time = processedInput[2];
             String location = processedInput[3];
-            FitnessClass newClass = new FitnessClass(classType,instructor,Time.valueOf(time.toUpperCase()), Location.valueOf(location.toUpperCase()));
-//            schedule.addClass(newClass);
-//            schedule.printClasses();
+            FitnessClass newClass = new FitnessClass(classType, instructor, Time.valueOf(time.toUpperCase()), location.toUpperCase());
+            schedule.addClass(newClass);
         }
+        schedule.printSchedule();
     }
 
     /**
@@ -195,12 +244,16 @@ public class GymManager {
      * @throws FileNotFoundException
      */
     private void commandLM() throws FileNotFoundException {
-        File file = new File("C:\\Users\\Brandon\\Downloads\\memberList.txt"); //file path
+        File file = new File("C:\\Users\\SPCHB\\Downloads\\memberList.txt"); //file path
         Scanner sc = new Scanner(file);
         System.out.println("-list of members loaded-");
         while (sc.hasNextLine()){                                       //reads all lines as long as there is another line after it
+            String line = sc.nextLine();
+            if(line.length() < 5){
+                continue;
+            }
             String[] processedInput =  processLine(sc.nextLine());
-            Member tempMember = new Member (processedInput[1], processedInput[2], processedInput[3], processedInput[5]);
+            Member tempMember = new Member (processedInput[0], processedInput[1], processedInput[2], new Date(), processedInput[4]);
             addNewMember(tempMember);
             System.out.println(tempMember);
         }
@@ -226,11 +279,14 @@ public class GymManager {
                 case "PN" -> commandPN();
                 case "PC" -> commandPC();
                 case "C" -> commandC(inputLine);
+                case "CG" -> commandCG();
                 case "LS" -> commandLS();
                 case "LM" -> commandLM();
                 case "PF" -> commandPF();
                 case "AF" -> commandAF(inputLine);
                 case "AP" -> commandAP(inputLine);
+                case "D" -> commandD(inputLine);
+                case "DG" -> commandDG(inputLine);
                 case "Q" -> {
                     System.out.println("Gym Manager terminated.");
                     running = false;

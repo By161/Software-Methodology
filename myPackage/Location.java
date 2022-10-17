@@ -48,7 +48,7 @@ public enum Location {
      */
     @Override
     public String toString(){
-        return (this.name() + ", " + this.zipcode + ", " + this.county);
+        return (this.name());
         }
-    }
+}
 

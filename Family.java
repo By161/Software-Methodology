@@ -1,4 +1,8 @@
-
+import myPackage.Date;
+/**
+ * required class to make the Family membership type object
+ * @author Anna Kryzanekas, Brandon Yuen
+ */
 
 public class Family extends Member{
 
@@ -7,14 +11,13 @@ public class Family extends Member{
 
     /**
      * Creates a new instance of Member.
-     *
      * @param firstName the first name of a member.
      * @param lastName  the last name of a member.
      * @param dob       the date of birth of a member.
      * @param location  the member's gym location including town, county, and zip code.
      */
-    public Family(String firstName, String lastName, String dob, String location) {
-        super(firstName, lastName, dob, location); //invoke the superclass constructor
+    public Family(String firstName, String lastName, String dob, Date expire, String location) {
+        super(firstName, lastName, dob, expire, location); //invoke the superclass constructor
         this.numFamGuestPasses = 1;
     }
 
@@ -24,7 +27,7 @@ public class Family extends Member{
     }
 
     /**
-     *
+     * toString method to show the information of the family membership member
      * @return
      */
     @Override
