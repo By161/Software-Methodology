@@ -30,10 +30,13 @@ public class FitnessClass {
 
     /**
      * Method that adds students to the list when they want to check-in
+     *
      * @param member object that is meant to be added to the class
+     * @return
      */
-    public void addStudent(Member member) {
+    public boolean addStudent(Member member) {
         studentList.add(member);
+        return true;
     }
 
     /**
@@ -70,16 +73,18 @@ public class FitnessClass {
 
     /**
      * Method to remove a student from the class list if they decide they do not want to go to the class anymore
+     *
      * @param cancelStudent the student that is meant to be removed
      * @return new array with updated information and the cancelled student is removed.
      */
-    public String removeStudent(Member cancelStudent) {
+    public boolean removeStudent(Member cancelStudent) {
         if (this.classType.equals(classType)) {
             for (int i = 0; i < studentList.size(); i++) {
                 studentList.remove(cancelStudent);
+                return true;
             }
         }
-        return cancelStudent.getFirstName() + " " + cancelStudent.getLastName() + " is not a participant in " + classType;
+        return false;
     }
 
     /**
