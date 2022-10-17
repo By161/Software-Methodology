@@ -23,9 +23,19 @@ public enum Time {
         this.hour = hour;
         this.minute = minute;
     }
+
+    /**
+     * Getter method for hour
+     * @return the hour
+     */
     public int getHour(){
         return this.hour;
     }
+
+    /**
+     * Getter method for minute
+     * @return the minute
+     */
     public String getMinute(){
         return this.minute;
     }
