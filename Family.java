@@ -33,7 +33,7 @@ public class Family extends Member{
 
     /**
      * toString method to show the information of the family membership member
-     * @return
+     * @return a string representation of the family membership member
      */
     @Override
     public String toString() {
