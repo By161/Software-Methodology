@@ -15,9 +15,10 @@ public class FitnessClass {
 
     /**
      * Constructor for the FitnessClass object
-     * @param classType
-     * @param instructorName
-     * @param classStartingTime
+     * @param classType type of class that's being taught
+     * @param instructorName the name of the fitness instructor
+     * @param classStartingTime the time when the class will start
+     * @param location location of where the class will be held
      */
     public FitnessClass(String classType, String instructorName, Time classStartingTime, Location location) {
         this.classType = classType;
@@ -35,6 +36,11 @@ public class FitnessClass {
         studentList.add(member);
     }
 
+    /**
+     * Helper method that finds the inputted student within the student "database"
+     * @param member inputted member that needs to be found
+     * @return the index of the member inside the "database"
+     */
     public int findStudent(Member member) {
         for (int i = 0; i < studentList.size(); i++) {
             if (studentList.get(i).equals(member)) {

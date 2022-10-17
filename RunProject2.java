@@ -7,9 +7,9 @@ import java.io.FileNotFoundException;
  */
 public class RunProject2 {
     /**
-     * Calls the run method within the GymManager class
-     * Runs all of project 2
-     * @param args
+     * Driver class that runs project 2
+     * @param args all the user inputs
+     * @throws FileNotFoundException Signals that an attempt to open the file denoted by a specified pathname has failed.
      */
     public static void main (String[] args) throws FileNotFoundException {
         new GymManager().run();
