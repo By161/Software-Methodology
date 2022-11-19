@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Controller Class for the initial Main View GUI
@@ -26,6 +27,8 @@ public class MainViewController {
 
     @FXML
     public Button currentOrderButton;
+    public ArrayList<Pizza> pizzaList = new ArrayList<>();
+    public Order myOrder = new Order(pizzaList);
 
     @FXML
     protected void onChicagoStyleButtonClick() {
@@ -78,5 +81,9 @@ public class MainViewController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Order getMyOrder() {
+        return this.myOrder;
     }
 }

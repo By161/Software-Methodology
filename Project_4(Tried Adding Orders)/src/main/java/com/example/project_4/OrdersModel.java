@@ -1,64 +1,58 @@
 package com.example.project_4;
 
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ObservableList;
-
 import java.util.ArrayList;
 
 public class OrdersModel {
-    private SimpleIntegerProperty orderNumber;
-    private SimpleStringProperty pizzaStyle;
-    private SimpleStringProperty crust;
-    private SimpleListProperty toppings;
-    private SimpleDoubleProperty subtotal;
+    private int orderNumber;
+    private String pizzaStyle;
+    private String crust;
+    private ArrayList<String> toppings;
+    private double subtotal;
 
     public OrdersModel (Integer orderNum, String pizzaStyle, String crust, ArrayList<String> toppings, double price){
-        this.orderNumber = new SimpleIntegerProperty(orderNum);
-        this.pizzaStyle = new SimpleStringProperty(pizzaStyle);
-        this.crust = new SimpleStringProperty(crust);
-        this.toppings = new SimpleListProperty((ObservableList) toppings);
-        this.subtotal = new SimpleDoubleProperty(price);
+        this.orderNumber = orderNum;
+        this.pizzaStyle = pizzaStyle;
+        this.crust = crust;
+        this.toppings = toppings;
+        this.subtotal = price;
     }
 
     public int getOrderNum(){
-        return orderNumber.get();
+        return orderNumber;
     }
 
     public void setOrderNumber(int newOrderNum){
-        this.orderNumber = new SimpleIntegerProperty(newOrderNum);
+        this.orderNumber = newOrderNum;
     }
 
     public String getStyle(){
-        return pizzaStyle.get();
+        return pizzaStyle;
     }
 
     public void setPizzaStyle(String style){
-        this.pizzaStyle = new SimpleStringProperty(style);
+        this.pizzaStyle = style;
     }
 
     public String getCrust(){
-        return crust.get();
+        return crust;
     }
 
     public void setCrust(String crust){
-        this.crust = new SimpleStringProperty(crust);
+        this.crust = crust;
     }
 
     public ArrayList<String> getToppings(){
-        return (ArrayList<String>) this.toppings.get();
+        return (ArrayList<String>) this.toppings;
     }
     public void setToppings(ArrayList<String> toppings){
-        this.toppings = new SimpleListProperty<>((ObservableList) toppings);
+        this.toppings = toppings;
     }
 
     public double getPrice(){
-        return this.subtotal.get();
+        return this.subtotal;
     }
 
     public void setSubtotal(Double newPrice){
-        this.subtotal = new SimpleDoubleProperty(newPrice);
+        this.subtotal = newPrice;
     }
 }

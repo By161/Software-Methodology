@@ -320,9 +320,9 @@ public class NYPizzaController {
         else {
             pizza = pizzaFactory.createBuildYourOwn();
         }
-        ArrayList<Pizza> pizzas = new ArrayList<>();
-        pizzas.add(pizza);
-        myOrder = new Order(pizzas);
+        //ArrayList<Pizza> pizzas = new ArrayList<>();
+        //pizzas.add(pizza);
+        //myOrder = new Order(pizzas);
     }
 
 }

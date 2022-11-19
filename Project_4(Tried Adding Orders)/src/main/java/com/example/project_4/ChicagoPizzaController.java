@@ -304,7 +304,7 @@ public class ChicagoPizzaController {
         }
         ArrayList<Pizza> pizzas = new ArrayList<>();
         pizzas.add(pizza);
-        myOrder = new Order(pizzas);
+        //myOrder = new Order();
     }
     public Order getOrder(){
         return myOrder;

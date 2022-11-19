@@ -1,28 +1,45 @@
 package com.example.project_4;
-import java.util.ArrayList;
 
-/**
- *
- * @author Brandon Yuen, Anna Kryzanekas
- */
+import java.util.LinkedList;
+
 public class StoreOrder implements Customizable{
-ArrayList<Order> orderList = new ArrayList<Order>();
-    public StoreOrder(ArrayList<Order> orders){
-        this.orderList = orders;
+    private int currentOrderIndex = 0;
+    private LinkedList<Order> allOrders = new LinkedList<>();
+
+    public Order getCurrentOrder() {
+        return allOrders.get(currentOrderIndex);
+    }
+
+    public Order get(int index) {
+        return allOrders.get(index);
     }
 
     @Override
     public boolean add(Object obj) {
-        orderList.add((Order) obj);
+        Order orderToAdd = (Order) obj;
+        allOrders.add(orderToAdd);
         return true;
     }
 
     @Override
     public boolean remove(Object obj) {
-        if (orderList.contains((Order)obj)){
-            orderList.remove((Order) obj);
-            return true;
-        }
-        return false;
+        int index = (int) obj;
+        allOrders.remove(index);
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return allOrders.toString();
+    }
+
+    public void updateCurrentOrder() {
+        currentOrderIndex++;
+        Order newOrder = new Order();
+        allOrders.add(newOrder);
+    }
+
+    public int numberOfOrders() {
+        return allOrders.size();
     }
 }
