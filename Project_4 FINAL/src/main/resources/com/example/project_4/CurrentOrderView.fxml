@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="506.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_4.CurrentOrderController">
+   <children>
+      <Label layoutX="252.0" prefHeight="78.0" prefWidth="234.0" text="Your Order">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Label>
+      <TableView fx:id="currentOrderTable" fixedCellSize="1.0" layoutX="22.0" layoutY="93.0" prefHeight="393.0" prefWidth="684.0">
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy></TableView>
+      <Button fx:id="placeOrderButton" layoutX="598.0" layoutY="53.0" mnemonicParsing="false" onAction="#placeOrder" text="Place Order" />
+      <Button fx:id="removeButton" layoutX="598.0" layoutY="14.0" mnemonicParsing="false" onAction="#removeOrder" text="Remove" />
+      <Button fx:id="clearButton" layoutX="83.0" layoutY="53.0" mnemonicParsing="false" onAction="#clearOrder" text="Clear Order" />
+      <Label layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="85.0" text="Order Number:" />
+      <TextField fx:id="orderNumber" editable="false" layoutX="99.0" layoutY="14.0" prefHeight="25.0" prefWidth="9.0" />
+   </children>
+</AnchorPane>
