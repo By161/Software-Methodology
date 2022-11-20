@@ -291,34 +291,29 @@ public class ChicagoPizzaController {
     /**
      * Helper method that adds the inputted pizza into the current order
      */
-    public void addToOrder(){
+    public void addToOrder() {
         addToOrderButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                PizzaFactory pizzaToAdd = new ChicagoPizza(); //this is where we create a pizza but we need to specify the inputs
+                PizzaFactory chicagoPizzaToAdd = new ChicagoPizza(); //this is where we create a pizza but we need to specify the inputs
+                if (flavor.getValue().toString().equals("Deluxe")) {
+                    pizzaToAdd = chicagoPizzaToAdd.createDeluxe();
+                }
+                if (flavor.getValue().toString().equals("Meatzza")) {
+                    pizzaToAdd = chicagoPizzaToAdd.createMeatzza();
+                }
+                if (flavor.getValue().toString().equals("BBQChicken")) {
+                    pizzaToAdd = chicagoPizzaToAdd.createBBQChicken();
+                } else {
+                    pizzaToAdd = chicagoPizzaToAdd.createBuildYourOwn();
+                }
                 mainViewController.getCurrentOrder().add(pizzaToAdd);
             }
         });
-//        PizzaFactory pizzaFactory = new NYPizza();
-//        Pizza pizza;
-//        if (flavor.getValue().toString().equals("Deluxe")){
-//            pizza = pizzaFactory.createDeluxe();
-//        }
-//        else if (flavor.getValue().toString().equals("Meatzza")){
-//            pizza = pizzaFactory.createMeatzza();
-//        }
-//        else if(flavor.getValue().toString().equals("BBQChicken")){
-//            pizza = pizzaFactory.createBBQChicken();
-//        }
-//        else {
-//            pizza = pizzaFactory.createBuildYourOwn();
-//        }
+    }
+//
 //        ArrayList<Pizza> pizzas = new ArrayList<>();
 //        pizzas.add(pizza);
 //        //myOrder = new Order();
-    }
-    public Order getOrder(){
-        return myOrder;
-    }
 
 }

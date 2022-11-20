@@ -307,30 +307,26 @@ public class NYPizzaController {
     /**
      * Helper method that adds the selected pizza into the current order when the button is pressed.
      */
-    public void addToOrder(){
+    public void addToOrder() {
         addToOrderButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                PizzaFactory pizzaToAdd = new NYPizza(); //this is where we create a pizza but we need to specify the inputs
+                PizzaFactory NYPizzaToAdd = new NYPizza(); //this is where we create a pizza but we need to specify the inputs
+                mainViewController.getCurrentOrder().add(pizzaToAdd);
+                if (flavor.getValue().toString().equals("Deluxe")) {
+                    pizzaToAdd = NYPizzaToAdd.createDeluxe();
+                }
+                if (flavor.getValue().toString().equals("Meatzza")) {
+                    pizzaToAdd = NYPizzaToAdd.createMeatzza();
+                }
+                if (flavor.getValue().toString().equals("BBQChicken")) {
+                    pizzaToAdd = NYPizzaToAdd.createBBQChicken();
+                } else {
+                    pizzaToAdd = NYPizzaToAdd.createBuildYourOwn();
+                }
                 mainViewController.getCurrentOrder().add(pizzaToAdd);
             }
         });
-//        PizzaFactory pizzaFactory = new NYPizza();
-//        Pizza pizza;
-//        if (flavor.getValue().toString().equals("Deluxe")){
-//            pizza = pizzaFactory.createDeluxe();
-//            System.out.println(pizza);
-//        }
-//        else if (flavor.getValue().toString().equals("Meatzza")){
-//            pizza = pizzaFactory.createMeatzza();
-//        }
-//        else if(flavor.getValue().toString().equals("BBQChicken")){
-//            pizza = pizzaFactory.createBBQChicken();
-//        }
-//        else {
-//            pizza = pizzaFactory.createBuildYourOwn();
-//        }
     }
-
 }
 
