@@ -2,6 +2,8 @@ package com.example.project_4;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -52,6 +54,8 @@ public class ChicagoPizzaController {
     private Button remove;
     @FXML
     private Button addToOrderButton;
+
+    private MainViewController mainViewController;
     Order myOrder;
     DecimalFormat df = new DecimalFormat("#.00");
     ArrayList<String> listToppings = new ArrayList<String>(Arrays.asList("Sausage", "pepperoni", "green pepper",
@@ -287,24 +291,31 @@ public class ChicagoPizzaController {
     /**
      * Helper method that adds the inputted pizza into the current order
      */
-    public void AddToOrder(){
-        PizzaFactory pizzaFactory = new NYPizza();
-        Pizza pizza;
-        if (flavor.getValue().toString().equals("Deluxe")){
-            pizza = pizzaFactory.createDeluxe();
-        }
-        else if (flavor.getValue().toString().equals("Meatzza")){
-            pizza = pizzaFactory.createMeatzza();
-        }
-        else if(flavor.getValue().toString().equals("BBQChicken")){
-            pizza = pizzaFactory.createBBQChicken();
-        }
-        else {
-            pizza = pizzaFactory.createBuildYourOwn();
-        }
-        ArrayList<Pizza> pizzas = new ArrayList<>();
-        pizzas.add(pizza);
-        //myOrder = new Order();
+    public void addToOrder(){
+        addToOrderButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                PizzaFactory pizzaToAdd = new ChicagoPizza(); //this is where we create a pizza but we need to specify the inputs
+                mainViewController.getCurrentOrder().add(pizzaToAdd);
+            }
+        });
+//        PizzaFactory pizzaFactory = new NYPizza();
+//        Pizza pizza;
+//        if (flavor.getValue().toString().equals("Deluxe")){
+//            pizza = pizzaFactory.createDeluxe();
+//        }
+//        else if (flavor.getValue().toString().equals("Meatzza")){
+//            pizza = pizzaFactory.createMeatzza();
+//        }
+//        else if(flavor.getValue().toString().equals("BBQChicken")){
+//            pizza = pizzaFactory.createBBQChicken();
+//        }
+//        else {
+//            pizza = pizzaFactory.createBuildYourOwn();
+//        }
+//        ArrayList<Pizza> pizzas = new ArrayList<>();
+//        pizzas.add(pizza);
+//        //myOrder = new Order();
     }
     public Order getOrder(){
         return myOrder;

@@ -39,7 +39,7 @@ public class StoreOrder implements Customizable{
         allOrders.add(newOrder);
     }
 
-    public int numberOfOrders() {
+    public int getNumOfOrders() {
         return allOrders.size();
     }
 }

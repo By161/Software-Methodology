@@ -28,7 +28,9 @@ public class MainViewController {
     @FXML
     public Button currentOrderButton;
     public ArrayList<Pizza> pizzaList = new ArrayList<>();
-    public Order myOrder = new Order(pizzaList);
+    //public Order myOrder = new Order(pizzaList);
+
+    private StoreOrder allOrdersFromStore = new StoreOrder();
 
     @FXML
     protected void onChicagoStyleButtonClick() {
@@ -83,7 +85,15 @@ public class MainViewController {
         }
     }
 
-    public Order getMyOrder() {
-        return this.myOrder;
+    public StoreOrder getAllOrdersFromStore() {
+        return allOrdersFromStore;
     }
+
+    public Order getCurrentOrder() {
+        return allOrdersFromStore.getCurrentOrder();
+    }
+
+    //public Order getMyOrder() {
+        //return this.myOrder;
+    //}
 }

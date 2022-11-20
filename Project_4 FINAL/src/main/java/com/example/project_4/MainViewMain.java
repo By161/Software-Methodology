@@ -25,36 +25,36 @@ public class MainViewMain extends Application {
         launch();
     }
 
-    public static void showOrderNY(Order order) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainViewMain.class.getResource("NYPizzaView.fxml"));
-
-        NYPizzaController nyc = loader.getController(); // This did the "trick"
-        nyc.setOrder(myOrder); // Passing the client-object to the ClientViewController
-    }
-
-    public static void showOrderChicago(Order order) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainViewMain.class.getResource("ChicagoPizzaView.fxml"));
-
-        ChicagoPizzaController chicago = loader.getController(); // This did the "trick"
-        chicago.setOrder(myOrder); // Passing the client-object to the ClientViewController
-    }
-
-    public static void showOrderOrder(Order order) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainViewMain.class.getResource("OrderView.fxml"));
-
-        CurrentOrderController currentOrder = loader.getController(); // This did the "trick"
-        currentOrder.setOrder(myOrder); // Passing the client-object to the ClientViewController
-    }
-
-    public static void showOrderStoreOrder(Order order) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainViewMain.class.getResource("StoreOrderView.fxml"));
-
-        StoreOrdersController store = loader.getController(); // This did the "trick"
-        store.setOrder(myOrder); // Passing the client-object to the ClientViewController
-    }
+//    public static void showOrderNY(Order order) throws IOException {
+//        FXMLLoader loader = new FXMLLoader();
+//        loader.setLocation(MainViewMain.class.getResource("NYPizzaView.fxml"));
+//
+//        NYPizzaController nyc = loader.getController(); // This did the "trick"
+//        nyc.setOrder(myOrder); // Passing the client-object to the ClientViewController
+//    }
+//
+//    public static void showOrderChicago(Order order) throws IOException {
+//        FXMLLoader loader = new FXMLLoader();
+//        loader.setLocation(MainViewMain.class.getResource("ChicagoPizzaView.fxml"));
+//
+//        ChicagoPizzaController chicago = loader.getController(); // This did the "trick"
+//        chicago.setOrder(myOrder); // Passing the client-object to the ClientViewController
+//    }
+//
+//    public static void showOrderOrder(Order order) throws IOException {
+//        FXMLLoader loader = new FXMLLoader();
+//        loader.setLocation(MainViewMain.class.getResource("OrderView.fxml"));
+//
+//        CurrentOrderController currentOrder = loader.getController(); // This did the "trick"
+//        currentOrder.setOrder(myOrder); // Passing the client-object to the ClientViewController
+//    }
+//
+//    public static void showOrderStoreOrder(Order order) throws IOException {
+//        FXMLLoader loader = new FXMLLoader();
+//        loader.setLocation(MainViewMain.class.getResource("StoreOrderView.fxml"));
+//
+//        StoreOrdersController store = loader.getController(); // This did the "trick"
+//        store.setOrder(myOrder); // Passing the client-object to the ClientViewController
+//    }
 
 }

@@ -4,7 +4,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="573.0" prefWidth="711.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_4.NYPizzaController">
+<AnchorPane prefHeight="573.0" prefWidth="711.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_4.NYPizzaController">
    <children>
       <ImageView fx:id="picture" fitHeight="181.0" fitWidth="259.0" layoutX="434.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -24,6 +24,6 @@
       <Label fx:id="myLabel1" layoutX="475.0" layoutY="222.0" text="Selected Toppings" />
       <Button fx:id="add" layoutX="294.0" layoutY="285.0" mnemonicParsing="false" onAction="#onAddButtonClick" prefHeight="25.0" prefWidth="66.0" text="&gt;&gt;" />
       <Button fx:id="remove" layoutX="293.0" layoutY="411.0" mnemonicParsing="false" onAction="#onRemoveButtonClick" prefHeight="25.0" prefWidth="66.0" text="&lt;&lt;" />
-      <Button fx:id="addToOrderButton" layoutX="424.0" layoutY="518.0" mnemonicParsing="false" onAction="#addToOrder" prefHeight="25.0" prefWidth="200.0" text="Add to order" />
+      <Button fx:id="placeOrderButton" layoutX="424.0" layoutY="518.0" mnemonicParsing="false" onAction="#AddToOrder" prefHeight="25.0" prefWidth="200.0" text="Add to order" />
    </children>
 </AnchorPane>
