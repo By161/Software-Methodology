@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="240.0" prefWidth="486.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_4.ErrorViewController">
+   <children>
+      <Label layoutX="150.0" layoutY="31.0" prefHeight="96.0" prefWidth="186.0" text="Error! ">
+         <font>
+            <Font size="66.0" />
+         </font>
+      </Label>
+      <Label layoutX="15.0" layoutY="117.0" prefHeight="64.0" prefWidth="466.0" text="Please close this window to go back to the pizza menu">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
