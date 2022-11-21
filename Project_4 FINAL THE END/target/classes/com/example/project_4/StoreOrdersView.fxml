@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="406.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_4.StoreOrdersController">
+   <children>
+      <Label layoutX="107.0" layoutY="14.0" prefHeight="36.0" prefWidth="417.0" text="RU Pizzeria Database">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <ListView fx:id="displayAllPlacedOrders" layoutX="315.0" layoutY="95.0" prefHeight="273.0" prefWidth="280.0" />
+      <Button fx:id="removeButtonFromPlaced" layoutX="509.0" layoutY="12.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="79.0" text="Remove a Placed Order" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="10.0" />
+         </font></Button>
+      <Button fx:id="exportButton" layoutX="535.0" layoutY="373.0" mnemonicParsing="false" text="Export" />
+      <ListView fx:id="displayCurrentOrder" layoutX="16.0" layoutY="96.0" prefHeight="273.0" prefWidth="280.0" />
+      <Label layoutX="94.0" layoutY="79.0" text="Order in Shopping Cart" />
+      <Label layoutX="416.0" layoutY="79.0" prefHeight="17.0" prefWidth="79.0" text="Placed Orders" />
+      <Button fx:id="removeButtonFromCurrent" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="79.0" text="Remove From Shopping Cart" wrapText="true">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Label layoutX="315.0" layoutY="378.0" text="Number of Orders:" />
+      <TextField fx:id="numberOfOrders" layoutX="423.0" layoutY="373.0" prefHeight="26.0" prefWidth="70.0" />
+   </children>
+</AnchorPane>
