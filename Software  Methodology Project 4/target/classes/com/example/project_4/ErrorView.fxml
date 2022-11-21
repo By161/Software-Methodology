@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="229.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_4.ErrorViewController">
+   <children>
+      <Label layoutX="288.0" layoutY="14.0" prefHeight="96.0" prefWidth="186.0" text="Error! ">
+         <font>
+            <Font size="66.0" />
+         </font>
+      </Label>
+      <Label layoutX="148.0" layoutY="110.0" prefHeight="64.0" prefWidth="466.0" text="Please close this window to go back to the pizza menu">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="162.0" prefHeight="25.0" prefWidth="710.0" text="A reason that this might have popped up: you did not select a topping to add/remove, or you have chosen more than 7 toppings" />
+   </children>
+</AnchorPane>
