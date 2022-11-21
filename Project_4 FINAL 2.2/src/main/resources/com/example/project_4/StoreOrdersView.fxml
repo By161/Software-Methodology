@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_4.StoreOrdersController">
+   <children>
+      <Label layoutX="92.0" layoutY="14.0" prefHeight="36.0" prefWidth="417.0" text="RU Pizzeria Database">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Label>
+      <ListView fx:id="displayAllOrders" layoutX="8.0" layoutY="92.0" prefHeight="300.0" prefWidth="587.0" />
+      <Button fx:id="removeButton" layoutX="509.0" layoutY="30.0" mnemonicParsing="false" text="Remove" />
+      <Button fx:id="exportButton" layoutX="22.0" layoutY="30.0" mnemonicParsing="false" text="Export" />
+   </children>
+</AnchorPane>
