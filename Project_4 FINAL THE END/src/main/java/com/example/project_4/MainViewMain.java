@@ -12,6 +12,7 @@ import java.io.IOException;
  * @author Brandon Yuen, Anna Kryzanekas
  */
 public class MainViewMain extends Application {
+
     /**
      * Sets up the initial stage of when the application starts up
      * @param stage initial stage

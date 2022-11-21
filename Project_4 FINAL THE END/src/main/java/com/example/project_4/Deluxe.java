@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 public class Deluxe extends Pizza{
     public double price;
+    private static final double SMALL_PRICE = 14.99;
+    private static final double MEDIUM_PRICE = 16.99;
+    private static final double LARGE_PRICE = 18.99;
     private ArrayList<String> toppings;
     private Crust crust;
     private Size size;
@@ -26,16 +29,16 @@ public class Deluxe extends Pizza{
     @Override
     public double price() {
         if(size.equals("Small")){
-            super.setPrice(14.99);
-            return 14.99;
+            super.setPrice(SMALL_PRICE);
+            return SMALL_PRICE;
         }
         else if (size.equals("Medium")){
-            super.setPrice(16.99);
-            return 16.99;
+            super.setPrice(MEDIUM_PRICE);
+            return MEDIUM_PRICE;
         }
         else{
-            super.setPrice(18.99);
-            return 18.99;
+            super.setPrice(LARGE_PRICE);
+            return LARGE_PRICE;
         }
     }
     public String getCrust(){

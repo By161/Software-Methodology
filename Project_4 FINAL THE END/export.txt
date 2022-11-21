@@ -1,0 +1,8 @@
+Order Number: 1 , [Sausage, pepperoni, green pepper, onion, mushroom], Brooklyn, Small, $14.99
+[Sausage, pepperoni, green pepper, onion, mushroom], Brooklyn, Small, $14.99
+[Sausage, pepperoni, green pepper, onion, mushroom], Brooklyn, Small, $14.99
+$47.95
+Order Number: 2 , [Sausage, pepperoni, green pepper, onion, mushroom], Brooklyn, Small, $14.99
+[Sausage, pepperoni, green pepper, onion, mushroom], Brooklyn, Small, $14.99
+[Sausage, pepperoni, green pepper, onion, mushroom], Brooklyn, Small, $14.99
+$47.95

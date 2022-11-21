@@ -26,8 +26,6 @@ public class MainViewController {
 
     @FXML
     public Button currentOrderButton;
-    public ArrayList<Pizza> pizzaList = new ArrayList<>();
-    //public Order myOrder = new Order(pizzaList);
 
     private StoreOrder allOrdersFromStore = new StoreOrder();
 
@@ -133,5 +131,4 @@ public class MainViewController {
     public Order getCurrentOrder() {
         return allOrdersFromStore.getCurrentOrder();
     }
-
 }

@@ -12,6 +12,19 @@ import java.util.Arrays;
  * @author Brandon Yuen, Anna Kryzanekas
  */
 public class NYPizza implements PizzaFactory {
+    public static final double PRICE_TOPPING = 1.59;
+    public static double PRICE_SMALL_DELUXE = 14.99;
+    public static double PRICE_MEDIUM_DELUXE = 16.99;
+    public static double PRICE_LARGE_DELUXE = 18.99;
+    public static double PRICE_SMALL_BBQ = 13.99;
+    public static double PRICE_MEDIUM_BBQ = 15.99;
+    public static double PRICE_LARGE_BBQ = 17.99;
+    public static double PRICE_SMALL_MEATZZA = 15.99;
+    public static double PRICE_MEDIUM_MEATZZA = 17.99;
+    public static double PRICE_LARGE_MEATZZA = 19.99;
+    public static double PRICE_SMALL_BYO = 8.99;
+    public static double PRICE_MEDIUM_BYO = 10.99;
+    public static double PRICE_LARGE_BYO = 12.99;
     @Override
     public Pizza createDeluxe() {
         Crust crust = new Crust ("Brooklyn");
@@ -20,13 +33,13 @@ public class NYPizza implements PizzaFactory {
                 "green pepper", "onion", "mushroom"));
         double price;
         if(NYPizzaController.size.equals("Small")){
-            price = 14.99;
+            price = PRICE_SMALL_DELUXE;
         }
         else if(NYPizzaController.size.equals("Medium")){
-            price = 16.99;
+            price = PRICE_MEDIUM_DELUXE;
         }
         else{
-            price = 18.99;
+            price = PRICE_LARGE_DELUXE;
         }
         Pizza newNYDeluxe = new Pizza(listToppingsDeluxe, crust, new Size(NYPizzaController.size), price) {
             @Override
@@ -47,13 +60,13 @@ public class NYPizza implements PizzaFactory {
             public double price() {
                 switch (NYPizzaController.size) {
                     case "Small":
-                        price = 14.99;
+                        price = PRICE_SMALL_DELUXE;
                         return price;
                     case "Medium":
-                        price = 16.99;
+                        price = PRICE_MEDIUM_DELUXE;
                         return price;
                     case "Large":
-                        price = 18.99;
+                        price = PRICE_LARGE_DELUXE;
                         return price;
                     default:
                         return price;
@@ -71,13 +84,13 @@ public class NYPizza implements PizzaFactory {
                 "beef", "ham"));
         double price;
         if(NYPizzaController.size.equals("Small")){
-            price = 15.99;
+            price = PRICE_SMALL_MEATZZA;
         }
         else if(NYPizzaController.size.equals("Medium")){
-            price = 17.99;
+            price = PRICE_MEDIUM_MEATZZA;
         }
         else{
-            price = 19.99;
+            price = PRICE_LARGE_MEATZZA;
         }
         Pizza newNYMeatzza = new Pizza(listToppingsDeluxe, crust, new Size(NYPizzaController.size), price) {
             @Override
@@ -98,13 +111,13 @@ public class NYPizza implements PizzaFactory {
             public double price() {
                 switch (NYPizzaController.size) {
                     case "Small":
-                        price = 15.99;
+                        price = PRICE_SMALL_MEATZZA;
                         return price;
                     case "Medium":
-                        price = 17.99;
+                        price = PRICE_MEDIUM_MEATZZA;
                         return price;
                     case "Large":
-                        price = 19.99;
+                        price = PRICE_LARGE_MEATZZA;
                         return price;
                     default:
                         return price;
@@ -122,13 +135,13 @@ public class NYPizza implements PizzaFactory {
                 "provolone", "cheddar"));
         double price;
         if(NYPizzaController.size.equals("Small")){
-            price = 13.99;
+            price = PRICE_SMALL_BBQ;
         }
         else if(NYPizzaController.size.equals("Medium")){
-            price = 15.99;
+            price = PRICE_MEDIUM_BBQ;
         }
         else{
-            price = 17.99;
+            price = PRICE_LARGE_BBQ;
         }
         Pizza newBBQChicken = new Pizza(listToppingsDeluxe, crust, new Size(NYPizzaController.size), price) {
             @Override
@@ -149,13 +162,13 @@ public class NYPizza implements PizzaFactory {
             public double price() {
                 switch (NYPizzaController.size) {
                     case "Small":
-                        price = 13.99;
+                        price = PRICE_SMALL_BBQ;
                         return price;
                     case "Medium":
-                        price = 15.99;
+                        price = PRICE_MEDIUM_BBQ;
                         return price;
                     case "Large":
-                        price = 17.99;
+                        price = PRICE_LARGE_BBQ;
                         return price;
                     default:
                         return price;
@@ -172,13 +185,13 @@ public class NYPizza implements PizzaFactory {
         ArrayList<String> listToppings = new ArrayList<String>();
         double price;
         if(NYPizzaController.size.equals("Small")){
-            price = 8.99;
+            price = PRICE_SMALL_BYO;
         }
         else if(NYPizzaController.size.equals("Medium")){
-            price = 10.99;
+            price = PRICE_MEDIUM_BYO;
         }
         else{
-            price = 12.99;
+            price = PRICE_LARGE_BYO;
         }
         Pizza newNYBuildYourOwn = new Pizza(NYPizzaController.listToppingsBuildYourOwn,
                 crust, new Size(NYPizzaController.size), price) {
@@ -200,13 +213,13 @@ public class NYPizza implements PizzaFactory {
             public double price() {
                 switch (NYPizzaController.size) {
                     case "Small":
-                        price = 8.99 + (NYPizzaController.listToppingsBuildYourOwn.size()*1.59);
+                        price = PRICE_SMALL_BYO + (NYPizzaController.listToppingsBuildYourOwn.size() * PRICE_TOPPING);
                         return price;
                     case "Medium":
-                        price = 10.99 + (NYPizzaController.listToppingsBuildYourOwn.size()*1.59);
+                        price = PRICE_MEDIUM_BYO + (NYPizzaController.listToppingsBuildYourOwn.size() * PRICE_TOPPING);
                         return price;
                     case "Large":
-                        price = 12.99 + (NYPizzaController.listToppingsBuildYourOwn.size()*1.59);
+                        price = PRICE_LARGE_BYO + (NYPizzaController.listToppingsBuildYourOwn.size() * PRICE_TOPPING);
                         return price;
                     default:
                         return price;

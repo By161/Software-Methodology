@@ -10,6 +10,11 @@ import java.util.ArrayList;
  */
 public class BuildYourOwn extends Pizza{
     public double price = 0;
+    private static final int MAX_NUM_TOPPINGS = 7;
+    private static final double SMALL_PRICE = 8.99;
+    private static final double MEDIUM_PRICE = 10.99;
+    private static final double LARGE_PRICE = 12.99;
+    private static final double ADD_PRICE = 1.59;
     private ArrayList<String> toppings;
     private Crust crust;
     private Size size;
@@ -36,15 +41,15 @@ public class BuildYourOwn extends Pizza{
     public double price() {
         DecimalFormat df = new DecimalFormat("#.##");
         if(size.getSize().equals("Small")){
-            df.format(this.price = 8.99 + toppings.size() * 1.59);
+            df.format(this.price = SMALL_PRICE + toppings.size() * ADD_PRICE);
             return this.price;
         }
         else if (size.getSize().equals("Medium")){
-            df.format(this.price = 10.99 + toppings.size() * 1.59);
+            df.format(this.price = MEDIUM_PRICE + toppings.size() * ADD_PRICE);
             return this.price;
         }
         else{
-            df.format(this.price = 12.99 + toppings.size() * 1.59);
+            df.format(this.price = LARGE_PRICE + toppings.size() * ADD_PRICE);
             return this.price;
         }
     }
@@ -56,7 +61,7 @@ public class BuildYourOwn extends Pizza{
      */
     @Override
     public boolean add(Object obj) {
-        if (toppings.size() <= 7){
+        if (toppings.size() <= MAX_NUM_TOPPINGS){
             toppings.add(obj.toString());
         }
         return false;

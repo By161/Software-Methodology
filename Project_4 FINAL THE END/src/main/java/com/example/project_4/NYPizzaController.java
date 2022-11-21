@@ -24,7 +24,26 @@ import java.util.Arrays;
  * @author Brandon Yuen, Anna Kryzanekas
  */
 public class NYPizzaController {
+    public static final int MAX_NUM_TOPPINGS = 7;
+    public static final double PRICE_PER_TOPPING = 1.59;
     public static String size;
+    public static String INITIAL_PRICE = "14.99";
+    public static String INITIAL_SIZE = "Small";
+    public static String INITIAL_FLAVOR = "Deluxe";
+    public static String INITIAL_CRUST = "Brooklyn";
+    public static String PRICE_SMALL_DELUXE = "14.99";
+    public static String PRICE_MEDIUM_DELUXE = "16.99";
+    public static String PRICE_LARGE_DELUXE = "18.99";
+    public static String PRICE_SMALL_BBQ = "13.99";
+    public static String PRICE_MEDIUM_BBQ = "15.99";
+    public static String PRICE_LARGE_BBQ = "17.99";
+    public static String PRICE_SMALL_MEATZZA = "15.99";
+    public static String PRICE_MEDIUM_MEATZZA = "17.99";
+    public static String PRICE_LARGE_MEATZZA = "19.99";
+    public static String PRICE_SMALL_BYO = "8.99";
+    public static String PRICE_MEDIUM_BYO = "10.99";
+    public static String PRICE_LARGE_BYO = "12.99";
+
     ObservableList<String> pizzaFlavors = FXCollections
             .observableArrayList("Deluxe", "BBQ Chicken", "Meatzza", "Build your own");
     @FXML
@@ -83,17 +102,17 @@ public class NYPizzaController {
      * Initialize Method
      */
     public void initialize() {
-        size = "Small";
+        size = INITIAL_SIZE;
         rbSmall.setToggleGroup(sizeGroup);
         rbSmall.setSelected(true);
         rbMedium.setToggleGroup(sizeGroup);
         rbLarge.setToggleGroup(sizeGroup);
-        flavor.setValue("Deluxe");
+        flavor.setValue(INITIAL_FLAVOR);
         flavor.setItems(pizzaFlavors);
         price.setEditable(false);
         crust.setEditable(false);
-        crust.setText("Brooklyn");
-        price.setText("14.99");
+        crust.setText(INITIAL_CRUST);
+        price.setText(INITIAL_PRICE);
         toppings.getItems().addAll(listToppings);
         toppings.getItems().removeAll(listToppingsDeluxe);
         selectedToppings.getItems().addAll(listToppingsDeluxe);
@@ -109,57 +128,57 @@ public class NYPizzaController {
         if (flavor.getValue().equals("Deluxe")) {
             if (rbSmall.isSelected()) {
                 size = "Small";
-                price.setText("14.99");
+                price.setText(PRICE_SMALL_DELUXE);
             }
             if (rbMedium.isSelected()) {
                 size = "Medium";
-                price.setText("16.99");
+                price.setText(PRICE_MEDIUM_DELUXE);
             }
             if (rbLarge.isSelected()) {
                 size = "Large";
-                price.setText("18.99");
+                price.setText(PRICE_LARGE_DELUXE);
             }
         }
         if (flavor.getValue().equals("BBQ Chicken")) {
             if (rbSmall.isSelected()) {
                 size = "Small";
-                price.setText("13.99");
+                price.setText(PRICE_SMALL_BBQ);
             }
             if (rbMedium.isSelected()) {
                 size = "Medium";
-                price.setText("15.99");
+                price.setText(PRICE_MEDIUM_BBQ);
             }
             if (rbLarge.isSelected()) {
                 size = "Large";
-                price.setText("17.99");
+                price.setText(PRICE_LARGE_BBQ);
             }
         }
         if (flavor.getValue().equals("Meatzza")) {
             if (rbSmall.isSelected()) {
                 size = "Small";
-                price.setText("15.99");
+                price.setText(PRICE_SMALL_MEATZZA);
             }
             if (rbMedium.isSelected()) {
                 size = "Medium";
-                price.setText("17.99");
+                price.setText(PRICE_MEDIUM_MEATZZA);
             }
             if (rbLarge.isSelected()) {
                 size = "Large";
-                price.setText("19.99");
+                price.setText(PRICE_LARGE_MEATZZA);
             }
         }
         if (flavor.getValue().equals("Build your own")) {
             if (rbSmall.isSelected()) {
                 size = "Small";
-                price.setText("8.99");
+                price.setText(PRICE_SMALL_BYO);
             }
             if (rbMedium.isSelected()) {
                 size = "Medium";
-                price.setText("10.99");
+                price.setText(PRICE_MEDIUM_BYO);
             }
             if (rbLarge.isSelected()) {
                 size = "Large";
-                price.setText("12.99");
+                price.setText(PRICE_LARGE_BYO);
             }
         }
     }
@@ -186,7 +205,7 @@ public class NYPizzaController {
      * Helper method that executes when the add button is clicked
      */
     public void onAddButtonClick() {
-        if (getNumOfElementsInList(selectedToppings) < 7) {
+        if (getNumOfElementsInList(selectedToppings) < MAX_NUM_TOPPINGS) {
             String selectedItem = toppings.getSelectionModel().getSelectedItem();
             int selectedID = toppings.getSelectionModel().getSelectedIndex();
             listToppingsBuildYourOwn.add(selectedItem);
@@ -196,7 +215,7 @@ public class NYPizzaController {
                 toppings.getItems().remove(selectedID);
                 selectedToppings.getItems().add(selectedItem);
                 if (flavor.getValue().equals("Build your own")) {
-                    price.setText(String.valueOf(df.format(Double.parseDouble(price.getText()) + 1.59)));
+                    price.setText(String.valueOf(df.format(Double.parseDouble(price.getText()) + PRICE_PER_TOPPING)));
                 }
             }
         } else {
@@ -218,7 +237,7 @@ public class NYPizzaController {
                 selectedToppings.getItems().remove(selectedID);
                 toppings.getItems().add(selectedItem);
                 if (flavor.getValue().equals("Build your own")) {
-                    price.setText(String.valueOf(df.format(Double.parseDouble(price.getText()) - 1.59)));
+                    price.setText(String.valueOf(df.format(Double.parseDouble(price.getText()) - PRICE_PER_TOPPING)));
                 }
             }
         } else {

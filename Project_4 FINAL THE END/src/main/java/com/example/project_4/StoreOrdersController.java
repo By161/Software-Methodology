@@ -15,6 +15,7 @@ import java.io.IOException;
 public class StoreOrdersController {
     private MainViewController mainViewController;
     private final int SIZE_TO_SUBTRACT = 1;
+    private final int INDEX_OUT_OF_BOUNDS = -1;
 
     @FXML
     ListView displayAllPlacedOrders;
@@ -59,8 +60,8 @@ public class StoreOrdersController {
         removeButtonFromPlaced.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                if (displayAllPlacedOrders.getSelectionModel().getSelectedIndex() == -1) {
-                    //mainViewController.confirmPopup("Not applicable!");
+                if (displayAllPlacedOrders.getSelectionModel().getSelectedIndex() == INDEX_OUT_OF_BOUNDS) {
+                    // not allowed
                     return;
                 }
                 int removeIndex = displayAllPlacedOrders.getSelectionModel().getSelectedIndex();
@@ -77,8 +78,8 @@ public class StoreOrdersController {
         removeButtonFromCurrent.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                if (displayCurrentOrder.getSelectionModel().getSelectedIndex() == -1) {
-                    //mainViewController.confirmPopup("Not applicable!");
+                if (displayCurrentOrder.getSelectionModel().getSelectedIndex() == INDEX_OUT_OF_BOUNDS) {
+                    // not allowed
                     return;
                 }
                 int removeIndex = displayCurrentOrder.getSelectionModel().getSelectedIndex();
@@ -99,7 +100,6 @@ public class StoreOrdersController {
                     FileWriter myWriter = new FileWriter("export.txt");
                     myWriter.write(getExport());
                     myWriter.close();
-                    //mainViewController.confirmPopup("Successfully exported!");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -113,13 +113,13 @@ public class StoreOrdersController {
      */
     private String getExport() {
         StoreOrder allOrdersFromStore = mainViewController.getAllOrdersFromStore();
-        String ret = "";
+        String returnString = "";
         for (int i = 0; i < mainViewController.getAllOrdersFromStore().getNumOfOrders(); i++) {
             if (allOrdersFromStore.get(i).isCompleted()) {
-                ret += allOrdersFromStore.get(i).toString();
+                returnString += allOrdersFromStore.get(i).toStringWithOrderNumber() + "\n";
             }
         }
-        return ret;
+        return returnString;
     }
 
     private void updateView() {
@@ -135,7 +135,7 @@ public class StoreOrdersController {
         }
         for (int i = 0; i < mainViewController.getAllOrdersFromStore().getNumOfOrders(); i++) {
             if (allOrdersFromStore.get(i).isCompleted()) {
-                orders.add(allOrdersFromStore.get(i).toString());
+                orders.add(allOrdersFromStore.get(i).toStringWithOrderNumber());
             }
         }
         displayAllPlacedOrders.setItems(orders);

@@ -4,12 +4,15 @@ import java.text.DecimalFormat;
 import java.util.LinkedList;
 
 /**
- * Required Class to make an order object
+ * Required class to make an order object
  * @author Brandon Yuen, Anna Kryzanekas
  */
 public class Order implements Customizable {
-    private static final double SALES_TAX = 1.06625;
+    private static final double SALES_TAX_1 = 1.06625;
+    private static final double SALES_TAX_0 = 0.06625;
+    private double ZERO_DOUBLE = 0.00;
     private boolean completed;
+    private int orderNumberFinal;
     private LinkedList<Pizza> pizzas = new LinkedList<>();
 
     /**
@@ -37,8 +40,27 @@ public class Order implements Customizable {
         }
         else {
             completed = true;
+            orderNumberFinal = CurrentOrderController.orderNumber;
+            CurrentOrderController.orderNumber++;
+            CurrentOrderController.orderNumberForLabel++;
             return true;
         }
+    }
+
+    /**
+     * Getter method that returns the order number of the current order
+     * @return integer specifying the order number
+     */
+    public int getOrderNumber() {
+        return orderNumberFinal;
+    }
+
+    /**
+     * Getter method that returns the order number of the current order for the FXML label
+     * @return integer specifying the labeled order number in the order controller
+     */
+    public int getOrderNumberForLabel() {
+        return CurrentOrderController.orderNumberForLabel;
     }
 
     /**
@@ -83,11 +105,18 @@ public class Order implements Customizable {
     }
 
     /**
+     * Helper method that clears all the pizzas in the current order
+     */
+    public void clearOrder(){
+        pizzas.clear();
+    }
+
+    /**
      * Helper method to get the cost before tax
      * @return the cost before tax
      */
     public String getCostBeforeTax() {
-        double priceBeforeTax = 0.00;
+        double priceBeforeTax = ZERO_DOUBLE;
         for (int i = 0; i < pizzas.size(); i++) {
             priceBeforeTax += pizzas.get(i).price();
         }
@@ -101,11 +130,11 @@ public class Order implements Customizable {
      * @return the tax cost
      */
     public String getTax() {
-        double priceBeforeTax = 0.00;
+        double priceBeforeTax = ZERO_DOUBLE;
         for (int i = 0; i < pizzas.size(); i++) {
             priceBeforeTax += pizzas.get(i).price();
         }
-        double taxAmount = priceBeforeTax * SALES_TAX;
+        double taxAmount = priceBeforeTax * SALES_TAX_0;
         DecimalFormat df = new DecimalFormat("#.##");
         String taxAmountString = df.format(taxAmount);
         return "$" + taxAmountString;
@@ -116,11 +145,11 @@ public class Order implements Customizable {
      * @return the total cost of the order
      */
     public String getTotalCost() {
-        double priceBeforeTax = 0.00;
+        double priceBeforeTax = ZERO_DOUBLE;
         for (int i = 0; i < pizzas.size(); i++) {
             priceBeforeTax += pizzas.get(i).price();
         }
-        double finalTotalCost = priceBeforeTax * SALES_TAX;
+        double finalTotalCost = priceBeforeTax * SALES_TAX_1;
         DecimalFormat df = new DecimalFormat("#.##");
         String totalCostString = df.format(finalTotalCost);
         return "$" + totalCostString;
@@ -141,6 +170,20 @@ public class Order implements Customizable {
     }
 
     /**
+     * Helper method that represents order information with the order number to be referred to in the
+     * Store Orders Controller
+     * @return String that represents the order object with the order number
+     */
+    public String toStringWithOrderNumber() {
+        String returnString = "Order Number: " + String.valueOf(getOrderNumber()) + " , ";
+        for (int i = 0; i < pizzas.size(); i++) {
+            returnString += pizzas.get(i) + "\n";
+        }
+        returnString += getTotalCost();
+        return returnString;
+    }
+
+    /**
      * Getter method to get the pizza at the inputted index
      * @param index inputted index where we want to access the order
      * @return the pizza at the desired index
@@ -148,9 +191,4 @@ public class Order implements Customizable {
     public String getPizza(int index) {
         return pizzas.get(index).toString();
     }
-
-    public void clearOrder(){
-        pizzas.clear();
-    }
-
 }

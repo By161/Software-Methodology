@@ -7,6 +7,9 @@ import java.util.ArrayList;
  */
 public class Meatzza extends Pizza{
     public double price;
+    private static final double SMALL_PRICE = 15.99;
+    private static final double MEDIUM_PRICE = 17.99;
+    private static final double LARGE_PRICE = 19.99;
     private ArrayList<String> toppings;
     private Crust crust;
     private Size size;
@@ -28,16 +31,16 @@ public class Meatzza extends Pizza{
     @Override
     public double price() {
         if(size.equals("Small")){
-            super.setPrice(15.99);
-            return 15.99;
+            super.setPrice(SMALL_PRICE);
+            return SMALL_PRICE;
         }
         else if (size.equals("Medium")){
-            super.setPrice(17.99);
-            return 17.99;
+            super.setPrice(MEDIUM_PRICE);
+            return MEDIUM_PRICE;
         }
         else{
-            super.setPrice(19.99);
-            return 19.99;
+            super.setPrice(LARGE_PRICE);
+            return LARGE_PRICE;
         }
     }
 

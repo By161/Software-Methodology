@@ -13,8 +13,9 @@ import javafx.scene.control.TextField;
  */
 public class CurrentOrderController {
     private MainViewController mainViewController;
-    //private static final double SALES_TAX = .06625;
-    private int orderNumber = 1;
+
+    public static int orderNumber = 1;
+    public static int orderNumberForLabel = 1;
     @FXML
     Button removeButton = new Button();
 
@@ -40,7 +41,7 @@ public class CurrentOrderController {
     TextField totalCostLabel;
 
     /**
-     * called from the MainViewController to give this class access to the data from the other classes
+     * Called from the MainViewController to give this class access to the data from the other classes
      * @param controller the reference to the MainViewController
      */
     public void setMainViewController(MainViewController controller) {
@@ -49,7 +50,7 @@ public class CurrentOrderController {
     }
 
     /**
-     * initializes the necessary fields
+     * Initializes the necessary fields
      */
     public void initialize() {
         orderNumberLabel.setEditable(false);
@@ -90,19 +91,30 @@ public class CurrentOrderController {
         placeOrderButton.setOnAction(actionEvent -> {
             mainViewController.getCurrentOrder().makeCompleted();
             mainViewController.getAllOrdersFromStore().updateCurrentOrder();
-            //mainViewController.confirmPopup("Successfully submitted!"); //we would need to add this
             ObservableList<String> orderedPizzas = FXCollections.observableArrayList();
             orderedPizzas.add("");
             displayPizzas.setItems(orderedPizzas);
-            orderNumber++;
-            taxAmountLabel.setText("0.00");
-            costBeforeTaxLabel.setText("0.00");
-            totalCostLabel.setText("0.00");
+            taxAmountLabel.setText("$0.00");
+            costBeforeTaxLabel.setText("$0.00");
+            totalCostLabel.setText("$0.00");
+            updateView();
         });
     }
 
     /**
-     * updates the ListView after a change has been made
+     * Updates the label after a change has been made
+     */
+    public void updateLabel() {
+        String costBeforeTax = mainViewController.getCurrentOrder().getCostBeforeTax();
+        String taxAmount = mainViewController.getCurrentOrder().getTax();
+        String totalCost = mainViewController.getCurrentOrder().getTotalCost();
+        costBeforeTaxLabel.setText(costBeforeTax);
+        taxAmountLabel.setText(taxAmount);
+        totalCostLabel.setText(totalCost);
+    }
+
+    /**
+     * Updates the ListView after a change has been made
      */
     public void updateView() {
         if (mainViewController.getCurrentOrder().getNumPizzas() == 0) {
@@ -125,19 +137,7 @@ public class CurrentOrderController {
             orderedPizzas.add("Your pizza cart is empty!");
         }
         displayPizzas.setItems(orderedPizzas);
-        orderNumberLabel.setText(String.valueOf(orderNumber));
         updateLabel();
-    }
-
-    /**
-     * updates the label after a change has been made
-     */
-    public void updateLabel() {
-        String costBeforeTax = mainViewController.getCurrentOrder().getCostBeforeTax();
-        String taxAmount = mainViewController.getCurrentOrder().getTax();
-        String totalCost = mainViewController.getCurrentOrder().getTotalCost();
-        costBeforeTaxLabel.setText(costBeforeTax);
-        taxAmountLabel.setText(taxAmount);
-        totalCostLabel.setText(totalCost);
+        orderNumberLabel.setText(String.valueOf(mainViewController.getCurrentOrder().getOrderNumberForLabel()));
     }
 }

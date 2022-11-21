@@ -9,6 +9,9 @@ import java.util.ArrayList;
 public class BBQChicken extends Pizza{
 
     public double price;
+    private static final double SMALL_PRICE = 13.99;
+    private static final double MEDIUM_PRICE = 15.99;
+    private static final double LARGE_PRICE = 17.99;
     private ArrayList<String> toppings;
     private Crust crust;
     private Size size;
@@ -41,15 +44,15 @@ public class BBQChicken extends Pizza{
     @Override
     public double price() {
         if(size.equals("Small")){
-            price = 13.99;
+            price = SMALL_PRICE;
             return price;
         }
         else if (size.equals("Medium")){
-            price = 15.99;
+            price = MEDIUM_PRICE;
             return price;
         }
         else{
-            price = 17.99;
+            price = LARGE_PRICE;
             return price;
         }
     }
